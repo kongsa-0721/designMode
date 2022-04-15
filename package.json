@@ -1,0 +1,14 @@
+{
+  "name": "designmode",
+  "version": "1.0.0",
+  "main": "src/classExtend/index.ts",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc --build && vite",
+    "clean": "tsc --build --clean"
+  },
+  "devDependencies": {
+    "typescript": "^4.6.3",
+    "vite": "^2.9.1"
+  }
+}
