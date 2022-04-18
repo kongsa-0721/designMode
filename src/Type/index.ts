@@ -8,3 +8,5 @@ import { cl1 } from "./classType";
 console.log(getObjVal("name"));
 console.log(getObjVal("age"));
 new cl1({ name: "kongsa" });
+
+export {};

@@ -29,3 +29,5 @@ let Eg2: DogFn;
 // Eg1 = Eg2;
 // 反过来可以
 Eg2 = Eg1;
+
+export {};

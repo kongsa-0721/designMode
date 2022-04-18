@@ -121,3 +121,4 @@ type ToArrayHigh<Type> = [Type] extends [any] ? Array<Type> : never;
 //报错
 //const arr1: toArray<string | number> = [1, "1"];
 const arr2: ToArrayHigh<string | number> = [];
+export {};
