@@ -11,3 +11,7 @@ export class cl1 {
 }
 // private protected 的属性不能被获取到
 type ty4 = cl1;
+
+// ----------------把类当作接口使用---------------
+
+const obj1: cl1 = { name: "" };
