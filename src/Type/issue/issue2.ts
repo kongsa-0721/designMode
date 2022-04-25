@@ -22,7 +22,7 @@ function nfn<T extends string | number>(a: T, b: T) {
     return (a as number) + (b as number);
   } else {
     const check: never = a;
-    return "";
+    return;
   }
 }
 
