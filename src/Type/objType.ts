@@ -93,3 +93,16 @@ type P1<T> = [T] extends ["x"] ? 1 : 2;
 //Initial type: 2
 //用元组约束之后 一个不通过 则全不通过
 type ty11 = P1<"x" | "y">;
+
+//never 类型
+const errFn = (err: string): never => {
+  throw new Error(err);
+};
+const errWhile = (): never => {
+  while (true) {}
+};
+//定义一个obj 如果属性名是数字 则会被转化为字符串 所以报错 不能重复定义
+// const objj = {
+//   123:"string",
+//   "123":"number"
+// }
