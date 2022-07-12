@@ -23,8 +23,10 @@ type Equals<X, Y> = (<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y
   : 2
   ? true
   : false;
+type equal1<X, Y> = [X] extends [Y] ? ([Y] extends [X] ? true : false) : false;
 
 type p3 = Equals<p1, p2>;
+type p4 = equal1<p1, p2>;
 
 type Optional<T, P extends keyof T> = Omit<T, P> & Partial<Pick<T, P>>;
 

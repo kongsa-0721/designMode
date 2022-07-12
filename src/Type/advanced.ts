@@ -2,6 +2,10 @@
  * Created by KongSa on 2022/4/15-10:33 AM.
  */
 // -------------------partial-----------------------
+/**
+ * 这里的in的意思是类型映射 遍历所有的类型 然后返回
+ * p2: {cat?: string, dog?: string}
+ */
 type partial<T> = {
   [p in keyof T]?: T[p];
 };
