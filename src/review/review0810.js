@@ -124,3 +124,28 @@ function myNew(fn, ...rest) {
   fn.call(obj, ...rest);
   return obj;
 }
+/**
+ * string的一些方法
+ * trim 去首尾的空格
+ * toUpperCase  转化成大写
+ * tpLowerCase  转化成小写
+ * */
+let str = "this is a litle string";
+//includes 返回一个boolean值 并区分大小写
+console.log(str.includes("little"));
+//indexOf 返回第一次出现的位置下标
+console.log(str.indexOf("str"));
+//slice 提取一个新的字符串 不改变原来的字符串
+console.log(str.slice(1, 4));
+console.log(str);
+//split 用指定的分割字符 拆分并合成一个数组
+console.log(str.split(" "));
+//反转字符串 借助数组的reverse方法
+console.log(str.split("").reverse().join(""));
+/**
+ * Array的一些方法
+ * Array.from() 把类数组 可迭代对象 创建一个新的数组实例
+ * Array.of() 根据一组参数创建一个新的数组实例
+ */
+let arr = ["str1", "str2"];
+console.log(Array.isArray(arr));
