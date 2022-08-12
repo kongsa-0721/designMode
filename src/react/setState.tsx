@@ -12,9 +12,6 @@ class classComponent extends React.Component<any, any> {
     };
     this.tick = this.tick.bind(this);
   }
-  //进行初始化
-  input1: null | HTMLInputElement = null;
-  myRef = React.createRef<HTMLInputElement>();
   componentDidMount() {
     this.setState(
       //第一个参数 之前的state 第二个参数 props
@@ -35,21 +32,12 @@ class classComponent extends React.Component<any, any> {
     this.setState({ isHot: !this.state.isHot }, () => {
       console.log(this.state);
     });
-    console.log(this.refs);
   }
   render() {
     return (
       <>
         <div>{this.state.isHot + ""}</div>
         <button onClick={() => this.tick()}>log</button>
-        <input type="text" value={"name"} ref={"input1"} />
-        <input
-          type="text"
-          ref={(e) => {
-            this.input1 = e;
-          }}
-        />
-        <input type="text" ref={this.myRef} />
       </>
     );
   }
@@ -63,10 +51,17 @@ class SimplyComponent extends React.Component<
   state = {
     isHot: true,
   };
+  //使用箭头函数 不需要bind 或者使用{ () => this.changeIt }
+  //第一个参数传递一个对象 第二个参数作出修改 获得到了最新的值
   changeIt = () => {
-    this.setState({
-      isHot: !this.state.isHot,
-    });
+    this.setState(
+      {
+        isHot: !this.state.isHot,
+      },
+      () => {
+        console.log(this.state.isHot);
+      }
+    );
   };
 }
 
