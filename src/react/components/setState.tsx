@@ -3,7 +3,7 @@
  */
 import React from "react";
 
-class classComponent extends React.Component<any, any> {
+class ClassComponent extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
     //不要在构造器中使用setState
@@ -65,7 +65,7 @@ class SimplyComponent extends React.Component<
   };
 }
 
-function fnComponent() {
+function FnComponent() {
   const [light, setLight] = React.useState(false);
   function tick() {
     setLight((pre: boolean) => {
@@ -80,4 +80,27 @@ function fnComponent() {
   );
 }
 
-export { fnComponent };
+class HocInput extends React.Component<any, any> {
+  constructor(props: any) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+    this.state = {};
+  }
+  handleChange(dataType: string) {
+    const _this = this;
+    return function (e: any) {
+      _this.setState({ [dataType]: e.target.value });
+    };
+  }
+  render() {
+    return (
+      <>
+        <input type="text" onChange={this.handleChange("name")} />
+        <input type="text" onChange={this.handleChange("age")} />
+        <input type="text" onChange={this.handleChange("sex")} />
+      </>
+    );
+  }
+}
+
+export { FnComponent, ClassComponent, SimplyComponent, HocInput };
