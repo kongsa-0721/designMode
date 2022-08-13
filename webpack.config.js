@@ -21,6 +21,7 @@ module.exports = {
       template: "index.html",
       filename: "index.html",
       inject: "body",
+      favicon: "./assets/icon-sea.svg",
     }),
     new webpack.HotModuleReplacementPlugin(),
   ],
