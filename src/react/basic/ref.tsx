@@ -4,7 +4,7 @@
 
 import React from "react";
 
-class classComponent extends React.Component<any, any> {
+class ClassComponent extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
   }
@@ -30,3 +30,19 @@ class classComponent extends React.Component<any, any> {
     );
   }
 }
+
+function RefComponent() {
+  const ref1 = React.useRef<null | string>(null);
+  const log = () => {
+    console.log(ref1.current);
+    ref1.current = "string111";
+    console.log(ref1.current);
+  };
+  return (
+    <div>
+      <button onClick={log}>log</button>
+    </div>
+  );
+}
+
+export { RefComponent };
