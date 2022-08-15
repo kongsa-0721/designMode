@@ -3,15 +3,9 @@
  */
 
 import React from "react";
-import { RefComponent } from "./basic/ref";
 
 function App() {
-  return (
-    <>
-      this is app component
-      <RefComponent />
-    </>
-  );
+  return <>this is app component</>;
 }
 
 export default App;
