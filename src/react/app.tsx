@@ -3,9 +3,15 @@
  */
 
 import React from "react";
+import { HookReducer } from "./basic/hooks";
 
 function App() {
-  return <>this is app component</>;
+  return (
+    <>
+      this is app component
+      <HookReducer></HookReducer>
+    </>
+  );
 }
 
 export default App;
