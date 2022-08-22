@@ -5,6 +5,12 @@ export const ActionTypes = {
   PUT_DATA: "put_data",
   DELETE_DATA: "delete_data",
 };
+export type ReduxActionTypes = typeof ActionTypes[keyof typeof ActionTypes];
+export interface ReduxAction<T> {
+  type: ReduxActionTypes;
+  payload: T;
+}
+// 这个action可以直接放到dispatch里面 派发出去
 const putDataAction = () => {
   return {
     type: ActionTypes.PUT_DATA,

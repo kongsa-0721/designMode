@@ -1,13 +1,8 @@
 /**
  * Created by KongSa on 2022/8/22-7:25 PM.
  */
-import { ActionTypes } from "./action";
+import { ActionTypes, ReduxAction } from "./action";
 
-type ReduxActionTypes = typeof ActionTypes[keyof typeof ActionTypes];
-interface ReduxAction<T> {
-  type: ReduxActionTypes;
-  payload: T;
-}
 interface StateType {
   data: {
     name: string;
