@@ -11,6 +11,7 @@
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "html-webpack-plugin": "^5.5.0",
+    "redux-devtools-extension": "^2.13.9",
     "ts-loader": "^9.3.1",
     "typescript": "^4.6.3",
     "webpack": "^5.73.0",
@@ -19,6 +20,8 @@
   },
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.0.2",
+    "redux": "^4.2.0"
   }
 }

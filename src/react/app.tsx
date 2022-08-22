@@ -3,18 +3,16 @@
  */
 
 import React from "react";
-import { HookReducer } from "./basic/hooks";
-import { Conbiner, DisplayContext } from "./basic/conbiner";
+import Conbine from "./redux/combine";
+import { Provider } from "react-redux";
+import { store } from "./redux/store/store";
 
 function App() {
   return (
-    <>
+    <Provider store={store}>
       this is app component
-      <HookReducer></HookReducer>
-      <Conbiner>
-        <DisplayContext></DisplayContext>
-      </Conbiner>
-    </>
+      <Conbine />
+    </Provider>
   );
 }
 
