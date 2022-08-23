@@ -4,9 +4,19 @@
 import React from "react";
 import { connect } from "react-redux";
 import { ActionTypes } from "./store/action";
+import { MyPromise } from "./utils/mypromise";
 
 function Combine(props: any) {
-  console.log(props);
+  new MyPromise((res, rej) => {
+    res(props);
+  }).then(
+    (res) => {
+      console.log(res);
+    },
+    (res) => {
+      console.log("err");
+    }
+  );
   return (
     <div>
       {props.store.user.data.name}
