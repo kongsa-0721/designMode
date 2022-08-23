@@ -11,14 +11,16 @@ export interface ReduxAction<T> {
   payload: T;
 }
 // 这个action可以直接放到dispatch里面 派发出去
-const putDataAction = () => {
+const putDataAction = (data: { name: string; age: number }) => {
   return {
     type: ActionTypes.PUT_DATA,
+    payload: data,
   };
 };
-const deleteDataAction = () => {
+const deleteDataAction = (data: { name: string; age: number }) => {
   return {
     type: ActionTypes.DELETE_DATA,
+    payload: data,
   };
 };
 export { putDataAction, deleteDataAction };

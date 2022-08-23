@@ -1,8 +1,8 @@
-import { ReduxAction } from "../store/action/action";
-
 /**
  * Created by KongSa on 2022/8/23-12:57 PM.
  */
+
+import { ReduxAction } from "../store/action/action";
 export function createReducer(
   initialState: any,
   handlers: {

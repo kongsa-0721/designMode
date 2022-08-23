@@ -3,7 +3,11 @@
  */
 import React from "react";
 import { connect } from "react-redux";
-import { ActionTypes } from "./store/action/action";
+import {
+  ActionTypes,
+  deleteDataAction,
+  putDataAction,
+} from "./store/action/action";
 import { MyPromise } from "./utils/mypromise";
 
 function Combine(props: any) {
@@ -25,11 +29,21 @@ function Combine(props: any) {
         onClick={() => {
           props.putdata({
             name: "kongsa",
-            age: 18,
+            age: 20,
           });
         }}
       >
         put
+      </button>
+      <button
+        onClick={() => {
+          props.deleteData({
+            name: "chundan",
+            age: 22,
+          });
+        }}
+      >
+        delete
       </button>
     </div>
   );
@@ -42,7 +56,10 @@ export default connect(
   function (dispatch) {
     return {
       putdata(data: { name: string; age: number }) {
-        dispatch({ type: ActionTypes.PUT_DATA, payload: data });
+        dispatch(putDataAction(data));
+      },
+      deleteData(data: { name: string; age: number }) {
+        dispatch(deleteDataAction(data));
       },
     };
   }
