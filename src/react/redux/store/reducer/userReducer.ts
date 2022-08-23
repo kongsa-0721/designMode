@@ -1,7 +1,8 @@
 /**
- * Created by KongSa on 2022/8/22-7:25 PM.
+ * Created by KongSa on 2022/8/23-12:55 PM.
  */
-import { ActionTypes, ReduxAction } from "./action";
+import { ActionTypes, ReduxAction } from "../action/action";
+import { createReducer } from "../../utils/reducerUtils";
 
 interface StateType {
   data: {
@@ -17,20 +18,7 @@ const initialState: StateType = {
   },
   index: 0,
 };
-function createReducer(
-  initialState: any,
-  handlers: {
-    [type: string]: (state: any, action: any) => any;
-  }
-) {
-  return function reducer(state = initialState, action: ReduxAction<any>) {
-    if (handlers.hasOwnProperty(action.type)) {
-      return handlers[action.type](state, action);
-    } else {
-      return state;
-    }
-  };
-}
+
 const userReducer = createReducer(initialState, {
   [ActionTypes.PUT_DATA]: (
     state: StateType,

@@ -3,7 +3,7 @@
  */
 import React from "react";
 import { connect } from "react-redux";
-import { ActionTypes } from "./store/action";
+import { ActionTypes } from "./store/action/action";
 import { MyPromise } from "./utils/mypromise";
 
 function Combine(props: any) {
