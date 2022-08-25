@@ -69,10 +69,10 @@ function newInstance(left, right) {
 }
 
 function whichType(obj) {
-  if (obj === null) {
+  if (obj == null) {
     return obj + "";
   }
-  return (typeof obj === "function") | "object"
+  return typeof obj === "function" || "object"
     ? Object.prototype.toString.call(obj)
     : typeof obj;
 }

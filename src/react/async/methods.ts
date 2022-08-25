@@ -38,7 +38,7 @@ export function noSync() {
 
 class Commient {
   static RESOLVE = "is_resolve";
-  static REJECT = "is_rejcet";
+  static REJECT = "is_reject";
   static PENDING = "is_pending";
   status: string;
   result: any;
@@ -84,6 +84,45 @@ class Commient {
       }
       if (this.status === Commient.REJECT) {
         onRejected(this.result);
+      }
+    });
+  }
+  static all(callBackArray: any[]) {
+    return new Commient((res, rej) => {
+      if (callBackArray.length === 0) {
+        res([]);
+      } else {
+        let count: number = 0;
+        let result: any[] = [];
+        for (let i = 0; i < callBackArray.length; i++) {
+          //包装成promise返回值
+          Promise.resolve(callBackArray[i]).then(
+            (res1) => {
+              result[i] = res1;
+              if (++count === callBackArray.length) {
+                res(result);
+              }
+            },
+            (err) => {
+              rej(err);
+              return;
+            }
+          );
+        }
+      }
+    });
+  }
+  static race(callback: any[]) {
+    return new Commient((res, rej) => {
+      for (let item in callback) {
+        Promise.resolve(item).then(
+          (result) => {
+            res(result);
+          },
+          (err) => {
+            rej(err);
+          }
+        );
       }
     });
   }
