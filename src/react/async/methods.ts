@@ -1,74 +1,39 @@
 /**
  * Created by KongSa on 2022/8/24-10:08 AM.
  */
-// @ts-nocheck
-// const p1 = Promise.resolve(1);
-// const p2 = Promise.resolve(2);
-// const p3 = Promise.reject(3);
+const p1 = Promise.resolve(1);
+const p2 = Promise.resolve(2);
+const p3 = Promise.reject(3);
 
 export function noSync() {
-  // //all 有一个拒绝 直接拒绝 全部通过 返回一个数组
-  // Promise.all([p1, p2, p3])
-  //   .then((res) => {
-  //     console.log(res);
-  //   })
-  //   .catch((e) => {
-  //     console.log(e);
-  //   });
-  // //全部落地之后的 返回状态以及返回值
-  // Promise.allSettled([p1, p2, p3])
-  //   .then((res) => {
-  //     console.log(res);
-  //   })
-  //   .catch((e) => {
-  //     console.log(e);
-  //   });
-  // //返回最快的那个 成功用then接收 失败用catch
-  // Promise.race([p3, p2, p1])
-  //   .then((res) => {
-  //     console.log(res);
-  //   })
-  //   .catch((e) => {
-  //     console.log(e);
-  //   });
-  // //成功或者失败都会执行 但是不能接收任何参数 返回一个设置了finally回调函数的promise对象
-  // Promise.resolve(3).finally(() => {
-  //   console.log("finally");
-  // });
-
-  //缓存函数
-  function memorise(fn: any, resolver: any) {
-    let cache = new Map();
-    return function () {
-      const cacheKey = resolver
-        ? resolver(arguments)
-        : Array.from(arguments).join("_");
-      const contextMap = cache.get(cacheKey);
-      if (!contextMap) {
-        let value = fn.apply(this, arguments);
-        cache.set(cacheKey, new Map().set(this, value));
-        return value;
-      }
-      if (contextMap.has(this)) {
-        console.log("命中缓存");
-        return contextMap.get(this);
-      }
-      let val = fn.apply(this, arguments);
-      contextMap.set(this, val);
-      return val;
-    };
-  }
-
-  function add(a, b) {
-    return a + b;
-  }
-
-  const a = memorise(add);
-  // 测试用例
-  // console.log(a(1, 2));
-  // console.log(a(1, 2));
-  // console.log(a(1, 23));
-  // console.log(a(1, 23));
+  //all 有一个拒绝 直接拒绝 全部通过 返回一个数组
+  Promise.all([p1, p2, p3])
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+  //全部落地之后的 返回状态以及返回值
+  Promise.allSettled([p1, p2, p3])
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+  //返回最快的那个 成功用then接收 失败用catch
+  Promise.race([p3, p2, p1])
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+  //成功或者失败都会执行 但是不能接收任何参数 返回一个设置了finally回调函数的promise对象
+  Promise.resolve(3).finally(() => {
+    console.log("finally");
+  });
 }
 
 class Commient {
