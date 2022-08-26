@@ -6,8 +6,7 @@ import { connect } from "react-redux";
 import { deleteDataAction, putDataAction } from "./store/action/action";
 import { MyPromise } from "./utils/mypromise";
 import { noSync } from "../async/methods";
-import { logger } from "./utils/reduxMiddleware";
-//
+
 // const myReact = (() => {
 //   let state: any[] = [],
 //     storeSetter: any[] = [];
@@ -44,6 +43,14 @@ import { logger } from "./utils/reduxMiddleware";
 // const { cacheState } = myReact;
 // console.log(cacheState);
 
+// @ts-ignore
+Array.prototype.myForeach = async function (callback, thisArg) {
+  let _arr = this,
+    _thisArg = thisArg ? Object(thisArg) : window;
+  for (let i = 0; i < _arr.length; i++) {
+    await callback.call(_thisArg, _arr[i], i, _arr);
+  }
+};
 fun([
   () => console.group("start"),
   () => sleep(1000),
@@ -62,10 +69,17 @@ function sleep(ms: number) {
   });
 }
 // 使用 for of  for循环也可以
+// async function fun(arg: any[]) {
+//   for (let item of arg) {
+//     await item();
+//   }
+// }
+// 重写foreach方法
 async function fun(arg: any[]) {
-  for (let item of arg) {
+  // @ts-ignore
+  arg.myForeach(async (item) => {
     await item();
-  }
+  });
 }
 //普通的forEach 每一次都创建一个函数 async fn1 async fn2 达不到延迟的效果
 // function fun(arg: any[]) {
@@ -73,6 +87,7 @@ async function fun(arg: any[]) {
 //     await item();
 //   });
 // }
+
 function Combine(props: any) {
   new MyPromise((res, rej) => {
     res(props);

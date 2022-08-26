@@ -35,6 +35,8 @@ export function noSync() {
   // Promise.resolve(3).finally(() => {
   //   console.log("finally");
   // });
+
+  //缓存函数
   function memorise(fn: any, resolver: any) {
     let cache = new Map();
     return function () {
@@ -62,7 +64,7 @@ export function noSync() {
   }
 
   const a = memorise(add);
-  //
+  // 测试用例
   // console.log(a(1, 2));
   // console.log(a(1, 2));
   // console.log(a(1, 23));
