@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import { deleteDataAction, putDataAction } from "./store/action/action";
 import { MyPromise } from "./utils/mypromise";
 import { noSync } from "../async/methods";
+import { logDetail } from "../deep/tidy";
 
 function Combine(props: any) {
   new MyPromise((res, rej) => {
@@ -19,6 +20,7 @@ function Combine(props: any) {
     }
   );
   // noSync();
+  logDetail();
   return (
     <div>
       {props.store.user.data.name}
