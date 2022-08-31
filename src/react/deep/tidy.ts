@@ -153,6 +153,16 @@ function create(fn, ...args) {
   let res = fn.call(obj, ...args);
   return typeof res === "object" ? res : ob;
 }
+let map1 = new Map();
+map1.set({ value: "this is key" }, "ppx");
+Array.prototype.myForEach = function (callback, thisArg) {
+  let arr = this;
+  thisArg = thisArg ? Object(thisArg) : window;
+  for (let i = 0; i < arr.length; i++) {
+    callback.call(thisArg, arr[i], i, arr);
+  }
+};
+
 //打印函数
 function logDetail() {
   //打印扁平化数组的结果
@@ -165,6 +175,10 @@ function logDetail() {
   sortArray(messArray, indexArray);
   console.log(messArray);
   console.log(indexArray);
+  console.log(map1);
+  ["my", "foreach", "do"].myForEach((e) => {
+    console.log(e);
+  });
 }
 
 Promise.all([
