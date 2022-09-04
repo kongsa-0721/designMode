@@ -7,6 +7,7 @@ import { deleteDataAction, putDataAction } from "./store/action/action";
 import { MyPromise } from "./utils/mypromise";
 import { noSync } from "../async/methods";
 import { logDetail } from "../deep/tidy";
+import { TimerList } from "./utils/timerList";
 
 function Combine(props: any) {
   new MyPromise((res, rej) => {
@@ -21,8 +22,19 @@ function Combine(props: any) {
   );
   // noSync();
   logDetail();
+  const time1 = new TimerList({
+    time: 2000,
+    name: "time1",
+    callback: () => {
+      console.log("time1 do");
+    },
+  });
+  function clearT() {
+    time1.clearT("time1");
+  }
   return (
     <div>
+      <button onClick={clearT}>clearTime1</button>
       {props.store.user.data.name}
       {props.store.user.data.age}
       <button
