@@ -29,10 +29,12 @@ function quickSort(arg) {
   }
   return left_arr.concat(base_num, right_arr);
 }
+//判断数组是否相等 内存地址不想等 拼接成字符串
 console.log(quickSort(arr).join("") === arr.sort((a, b) => a - b).join(""));
 function twice(arg, num) {
   let begin = 0,
     last = arg.length - 1;
+  //注意  < =
   while (begin <= last) {
     let mid = Math.floor((begin + last) / 2);
     if (arg[mid] === num) {
