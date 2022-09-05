@@ -50,3 +50,4 @@ function twice(arg, num) {
   return -1;
 }
 console.log(quickSort(arr)[twice(quickSort(arr), 82)] === 82);
+export { quickSort, twice };
