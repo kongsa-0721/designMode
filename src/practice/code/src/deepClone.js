@@ -49,7 +49,8 @@ function deepClone3(origin) {
   while (stack.length) {
     const { target, origin } = stack.pop();
     for (let item of Object.getOwnPropertyNames(origin)) {
-      if (typeof origin[item] === "object") {
+      //判断是否为null null被认为是空对象指针
+      if (typeof origin[item] === "object" && origin[item] !== null) {
         if (map.has(origin[item])) {
           target[item] = map.get(origin[item]);
         } else {
@@ -65,4 +66,58 @@ function deepClone3(origin) {
   }
   return target;
 }
-export { deepClone1, deepClone2, deepClone3 };
+//最终版本
+function finalClone(origin) {
+  //使用我们的新方法来判断类型
+  let target = createObj(origin);
+  let map = new Map();
+  map.set(origin, target);
+  let stack = [{ target, origin }];
+  while (stack.length) {
+    const { target, origin } = stack.pop();
+    for (let item of Object.getOwnPropertyNames(origin)) {
+      //获取属性 origin 上item的属性
+      let descriptor = Object.getOwnPropertyDescriptor(origin, item);
+      if (descriptor.hasOwnProperty("value")) {
+        if (
+          typeof origin[item] === "object" ||
+          (typeof origin[item] === "object" && origin[item] !== null)
+        ) {
+          if (map.has(origin[item])) {
+            descriptor.value = map.get(origin[item]);
+          } else {
+            descriptor.value = createObj(origin[item]);
+            stack.push({ target: descriptor.value, origin: origin[item] });
+            map.set(origin[item], descriptor.value);
+          }
+        } else {
+          descriptor.value = origin[item];
+        }
+        Object.defineProperty(target, item, descriptor);
+      } else {
+        Object.defineProperty(target, item, descriptor);
+      }
+    }
+  }
+  return target;
+}
+function createObj(source) {
+  let target;
+  let type = typeof source;
+  let toStringRes = Object.prototype.toString.call(source);
+  let proto = Object.getPrototypeOf(source);
+  if (proto === Array.prototype && toStringRes === "[object Array]") {
+    target = source.slice();
+  } else if (proto === String.prototype && toStringRes === "[object String]") {
+    target = new String(source.valueOf());
+  } else if (type === "function") {
+    target = function (...args) {
+      return source.call(this, ...args);
+    };
+  } else {
+    target = Object.create(Object.getPrototypeOf(source));
+  }
+  return target;
+}
+
+export { deepClone1, deepClone2, deepClone3, finalClone };
