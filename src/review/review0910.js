@@ -146,39 +146,36 @@ function all(iterator) {
  * 使用Promise.race 等待这个执行的结果 看谁先执行完 执行完 再添加一个进来 并把之前的删除
  * 使用 Promise.all 返回执行过的所有结果
  */
-async function currency(iterator, limit, fn) {
-  let totalArr = [...iterator];
+async function currency(iterator, max, fn) {
+  let ret = [];
   let excuting = [];
-  for (let i = 0; i < totalArr.length; i++) {
-    const item = Promise.resolve(totalArr[i]);
-    if (excuting.length < limit) {
-      const e = item.then(() => {
-        excuting.splice(excuting.indexOf(e), 1);
-      });
-      excuting.push(e);
-      if (excuting.length >= limit) {
-        await Promise.race(excuting);
-      }
+  for (const item of iterator) {
+    const pItem = Promise.resolve().then(() => fn(item));
+    ret.push(pItem);
+    const e = pItem.then(() => {
+      excuting.splice(excuting.indexOf(e), 1);
+    });
+    excuting.push(e);
+    if (excuting.length >= max) {
+      await Promise.race(excuting);
     }
   }
-  return Promise.all(totalArr);
+  return Promise.all(ret);
 }
-
-async function asyncPool(iterator, max, fn) {
-  let totalArr = [...iterator];
-  let excuting = [];
-  for (let item of totalArr) {
-    const pItem = Promise.resolve(fn(item));
-    if (excuting.length < max) {
-      const e = pItem.then((e) => excuting.splice(excuting.indexOf(e), 1));
-      excuting.push(e);
-      if (excuting.length >= max) {
-        await Promise.race(excuting);
-      }
-    }
-  }
-  return Promise.all(excuting);
+function timeout(i) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(i);
+    }, i);
+  }).then((e) => {
+    console.log(e);
+    return e;
+  });
 }
+(async function () {
+  const res = await currency([1000, 1000, 1000, 2000], 2, timeout);
+  console.log(res);
+})();
 /**
  * http状态码
  * 100 继续 101 切换协议
@@ -192,3 +189,28 @@ async function asyncPool(iterator, max, fn) {
  * node事件循环
  * 整体代码 nextTick 微任务 宏任务 setTimeout
  */
+let target = {};
+let origin = {
+  a: "kongsa",
+  b: {
+    name: "春丹",
+    arr: [1, 2, 3, 4, 5],
+  },
+};
+function deepClone(origin, target) {
+  for (let item in origin) {
+    if (origin[item] instanceof Array) {
+      target[item] = [];
+      deepClone(origin[item], target[item]);
+    } else if (origin[item] instanceof Object) {
+      target[item] = {};
+      deepClone(origin[item], target[item]);
+    } else {
+      target[item] = origin[item];
+    }
+  }
+}
+//能完成最基本的任务
+deepClone(origin, target);
+
+Promise.resolve();

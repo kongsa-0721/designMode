@@ -12,23 +12,23 @@ async function ctrlPromise(
   max: number,
   iteratorFn: (item: any) => void
 ) {
-  let totalArr = [...allPromise];
+  let ret = [];
   let excuting: any[] = [];
-  for (let item of totalArr) {
-    const pItem = Promise.resolve(iteratorFn(item));
-    if (excuting.length < max) {
-      //每当一个完成的时候 就从数组中清除掉
-      const e = pItem.then(() => {
-        excuting.splice(excuting.indexOf(e), 1);
-      });
-      //超过最大限制 等待地最快的那个完事 上面会继续push进去一个 然后再等待
-      if (excuting.length >= max) {
-        await Promise.race(excuting);
-      }
+  for (const item of allPromise) {
+    const pItem = Promise.resolve().then(() => iteratorFn(item));
+    ret.push(pItem);
+    //每当一个完成的时候 就从数组中清除掉
+    const e = pItem.then(() => {
+      excuting.splice(excuting.indexOf(e), 1);
+    });
+    excuting.push(e);
+    //超过最大限制 等待地最快的那个完事 上面会继续push进去一个 然后再等待
+    if (excuting.length >= max) {
+      await Promise.race(excuting);
     }
   }
   //返回成功的数组
-  return Promise.all(totalArr);
+  return Promise.all(ret);
 }
 const timeout = (i: number) => {
   return new Promise((resolve) =>
@@ -37,6 +37,7 @@ const timeout = (i: number) => {
     }, i)
   ).then((i) => {
     console.log(i, "结束");
+    return i;
   });
 };
 
