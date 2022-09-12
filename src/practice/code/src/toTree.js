@@ -78,3 +78,14 @@ function toArray(arr) {
 }
 const res2 = JSON.stringify(toArray(toTree(data)));
 console.log(res2);
+//比较简便的转化为树
+function toTree(origin) {
+  let data = JSON.parse(JSON.stringify(origin));
+  return data.filter((id0) => {
+    //找出每一个pid对应的那个父元素
+    const _arr = data.filter((e) => e.pid === id0.id);
+    //把每一个父元素的所有儿子都加到父元素的children属性里面
+    _arr.length && (id0.children = _arr);
+    return id0.pid === 0;
+  });
+}
