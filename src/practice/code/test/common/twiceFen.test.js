@@ -2,7 +2,7 @@
  * Created by KongSa on 2022/9/5-1:50 PM.
  */
 import * as assert from "assert";
-import { twice, quickSort } from "../src/twiceFen.js";
+import { twice, quickSort } from "../../src/common/twiceFen.js";
 
 let arr = [4, 6, 6, 83, 5, 9, 32, 12, 6, 9, 4, 34, 82, 63, 12];
 

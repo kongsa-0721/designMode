@@ -5,7 +5,9 @@
   "main": "main.js",
   "type": "module",
   "scripts": {
-    "test": "mocha test/*.test.js"
+    "test": "mocha test/common/*.test.js",
+    "leet": "mocha test/leetTest/*.test.js",
+    "all": "mocha test/**/*.test.js"
   },
   "keywords": [
     "test",
