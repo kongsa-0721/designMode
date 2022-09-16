@@ -28,6 +28,7 @@ function process(start, rest, aim, range) {
   let res2 = process(start - 1, rest - 1, aim, range);
   return res1 + res2;
 }
+//主函数
 function main(N, M, K, P) {
   return process(M, K, P, N);
 }
@@ -37,7 +38,7 @@ function processCache(start, rest, aim, range, dp) {
   if (dp[start][rest] !== -1) {
     return dp[start][rest];
   }
-  //之前还没算过
+  //之前还没算过 填表
   let ans = 0;
   if (rest === 0) {
     ans = start === aim ? 1 : 0;
