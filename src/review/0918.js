@@ -161,3 +161,17 @@ function memo(fn, resolver) {
  * 302 临时重定向 使用get请求重定向 导致之前的post请求数据丢失
  * 303 see other 明确服务器期待客户端进行什么反应
  */
+function mapValues(inputObj, callback) {
+  return Object.keys(inputObj).reduce(
+    (res, key) => ({ ...res, [key]: callback(key, inputObj[key]) }),
+    {}
+  );
+}
+obj1 = { a: "kongsa", b: "chundan" };
+
+console.log(
+  mapValues(obj1, function (k, v) {
+    console.log(k, v);
+    return v + " Decorator";
+  })
+);

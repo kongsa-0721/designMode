@@ -6,10 +6,13 @@ import { connect } from "react-redux";
 import { deleteDataAction, putDataAction } from "./store/action/action";
 import { MyPromise } from "./utils/mypromise";
 import { noSync } from "../async/methods";
-import { logDetail } from "../deep/tidy";
+import { logDetail } from "../async/tidy";
 import { TimerList } from "./utils/timerList";
+import { Person } from "./utils/decorator";
 
 function Combine(props: any) {
+  const p1 = new Person();
+  p1.say();
   new MyPromise((res, rej) => {
     res(props);
   }).then(
@@ -21,7 +24,7 @@ function Combine(props: any) {
     }
   );
   // noSync();
-  logDetail();
+  // logDetail();
   const time1 = new TimerList({
     time: 2000,
     name: "time1",

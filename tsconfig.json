@@ -1,5 +1,8 @@
 {
   "compilerOptions": {
+    //装饰器相关
+    "experimentalDecorators": true,
+    "strictPropertyInitialization": false,
     /* Visit https://aka.ms/tsconfig.json to read more about this file */
 
     /* Projects */
