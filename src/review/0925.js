@@ -197,27 +197,3 @@ function flatArr2(arr) {
   return res;
 }
 console.log(flatArr2(arr1));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
