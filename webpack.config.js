@@ -4,7 +4,6 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   // entry: "./src/Type/index.ts",
-  // entry: "./src/review/review0810.js",
   entry: "./src/react/main.tsx",
   output: {
     filename: "bundle.js",
@@ -32,6 +31,10 @@ module.exports = {
         use: "ts-loader",
         exclude: /node_moudles/,
       },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
+      },
     ],
   },
   devServer: {
@@ -39,5 +42,15 @@ module.exports = {
     compress: true,
     host: "localhost",
     port: 3777,
+    //webpack配置代理跨域 线上还是要ng
+    proxy: {
+      "/api": {
+        target: "http://localhost:5000",
+        changeOrigin: true,
+        pathRewrite: {
+          "^/api": "",
+        },
+      },
+    },
   },
 };
