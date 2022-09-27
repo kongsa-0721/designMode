@@ -3,7 +3,7 @@
  */
 
 import React from "react";
-import Conbine from "./redux/combine";
+import Combine from "./redux/combine";
 import { Protal } from "./basic/protal";
 import { Provider } from "react-redux";
 import { store } from "./redux/store/store";
@@ -12,7 +12,7 @@ function App() {
   return (
     <Provider store={store}>
       this is app component
-      <Conbine />
+      <Combine />
       <Protal />
     </Provider>
   );

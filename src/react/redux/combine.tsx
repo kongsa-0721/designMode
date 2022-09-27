@@ -5,8 +5,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { deleteDataAction, putDataAction } from "./store/action/action";
 import { MyPromise } from "./utils/mypromise";
-import { noSync } from "../async/methods";
-import { logDetail } from "../async/tidy";
 import { TimerList } from "./utils/timerList";
 import { Person } from "./utils/decorator";
 
@@ -23,8 +21,6 @@ function Combine(props: any) {
       console.log("err");
     }
   );
-  // noSync();
-  // logDetail();
   const time1 = new TimerList({
     time: 2000,
     name: "time1",
