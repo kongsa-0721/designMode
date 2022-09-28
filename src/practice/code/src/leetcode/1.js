@@ -26,3 +26,8 @@ let twoSumHack = function (nums, target) {
   }
   return [];
 };
+
+//返回一个boolean值
+let twoSumES6 = (nums, target) => {
+  return nums.some((i) => nums.includes(target - i));
+};
