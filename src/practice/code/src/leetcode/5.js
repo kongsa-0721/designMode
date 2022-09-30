@@ -24,3 +24,35 @@ let longestPalindrome = function (s) {
   }
   return max;
 };
+//打表
+let palindrome = function (s) {
+  if (!s || s.length === 0) {
+    return;
+  }
+  if (s.length === 1) {
+    return s;
+  }
+  let len = s.length;
+  let ans = new Array(len).fill(1).map(() => new Array(len).fill(false));
+  let max = "";
+  for (let i = 0; i < len; i++) {
+    ans[i][i] = true;
+  }
+  for (let i = 0; i < len; i++) {
+    for (let j = 0; j < i; j++) {
+      //写不下去了呀 dp好难
+    }
+  }
+  return max;
+};
+
+console.log(palindrome("asdf"));
+//构建dp数组 充满false
+// for (let i = 0; i < len; i++) {
+//   ans[i] = [];
+// }
+// for (let i = 0; i < len; i++) {
+//   for (let j = 0; j < len; j++) {
+//     ans[i][j] = "";
+//   }
+// }

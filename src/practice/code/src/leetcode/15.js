@@ -15,8 +15,40 @@ let threeSum = function (nums) {
   nums = nums.sort((a, b) => {
     return a - b;
   });
-  if (nums[0] >= 0) {
+  //边界条件 有可能是000 如果都是>0的 不可能等于0了 直接推出
+  if (nums[0] > 0) {
     return [];
   }
   let res = [];
+  let len = nums.length;
+  for (let i = 0; i < len; i++) {
+    //先走一遍再说 走一遍把下次过滤掉就好了
+    if (nums[i] === nums[i - 1]) {
+      continue;
+    }
+    //slow 不用从头开始了 会出现重复的
+    let slow = i + 1,
+      fast = len - 1;
+    while (slow < fast) {
+      let sum = nums[slow] + nums[i] + nums[fast];
+      if (sum === 0) {
+        //过滤掉相同的 push进去之后还要接着-1
+        while (nums[fast] === nums[fast - 1]) {
+          fast--;
+        }
+        while (nums[slow] === nums[slow + 1]) {
+          slow++;
+        }
+        res.push([nums[slow], nums[i], nums[fast]]);
+        slow++;
+        fast--;
+      } else if (sum < 0) {
+        slow++;
+      } else {
+        fast--;
+      }
+    }
+  }
+  return res;
 };
+console.log(threeSum([0, 0, 0]));
