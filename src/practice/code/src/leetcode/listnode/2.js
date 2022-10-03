@@ -12,6 +12,7 @@
  *     this.next = (next===undefined ? null : next)
  * }
  * l1 l2 类型都是ListNode
+ * 这个题 说是倒叙的 其实我们相加就是倒叙的呀 123 123 先算3+3 直接按着顺序来就好了
  */
 //hack的做法 以为他是传进来一个数组 没想到是没有数组的方法的
 var addTwoNumbersHack = function (l1, l2) {
@@ -61,3 +62,32 @@ function dfs(num1, num2, carry) {
   head.next = dfs(num1 ? num1.next : null, num2 ? num2.next : null, newCarry);
   return head;
 }
+let addTwoNumbersRetry = function (l1, l2) {
+  let pre = new ListNode(0);
+  //新建一个节点 不能修改原来的 next一直往下指 那你最后可能只是一个空值或者是null
+  let node = pre;
+  let carry = 0;
+  while (l1 !== null || l2 !== null) {
+    let num1 = l1 === null ? 0 : l1.val;
+    let num2 = l2 === null ? 0 : l2.val;
+    let sum = num1 + num2 + carry;
+    let num = sum % 10;
+
+    carry = Math.floor(sum / 10);
+    node.next = new ListNode(num);
+
+    node = node.next;
+    if (l1 !== null) {
+      l1 = l1.next;
+    }
+    if (l2 !== null) {
+      l2 = l2.next;
+    }
+  }
+
+  if (carry === 1) {
+    node.next = new ListNode(1);
+    node = node.next;
+  }
+  return pre.next;
+};

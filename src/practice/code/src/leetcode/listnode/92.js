@@ -18,6 +18,7 @@
 let reverseBetween = function (head, left, right) {
   //新建一个dummy 如果从第一个开始就反转 就需要dummy dummy就是 0 1 2 3 4 5
   let dummy = new ListNode(0, head);
+  //这个pre永远指向l_node pre.next = l_node **
   let pre = dummy;
   let l_node = head;
   let r_node = head;

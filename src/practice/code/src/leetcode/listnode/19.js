@@ -29,3 +29,17 @@ let removeNthFromEnd = function (head, n) {
   slow.next = slow.next.next;
   return ret.next;
 };
+let removeNthFromEndRetry = function (head, n) {
+  let node = new ListNode(0, head);
+  let slow = node;
+  let fast = node;
+  for (let i = 0; i < n; i++) {
+    fast = fast.next;
+  }
+  while (fast.next) {
+    fast = fast.next;
+    slow = slow.next;
+  }
+  slow.next = slow.next.next;
+  return node.next;
+};
