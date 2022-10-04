@@ -7,6 +7,7 @@
  * @return {string[]}
  */
 let letterCombinations = function (digits) {
+  //注意corner case 这个可能是0 返回[]
   if (!digits || digits.length === 0) {
     return [];
   }
