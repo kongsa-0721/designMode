@@ -1,4 +1,4 @@
-- 👋 Hi, I'm @kongsa-0721
+- 👋 Hi, I'm @kongsa
 - 👀 I am interested in front-end development
 - 🌱 I am learning React now
 - 💞️ I'm looking for a front-end developer job
