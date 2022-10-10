@@ -43,7 +43,7 @@ console.log(a(1, 23));
 /**
  * 重写foreach
  */
-fun([
+fun11([
   () => console.group("start"),
   () => sleep(1000),
   () => console.log("waiting2"),
@@ -85,7 +85,7 @@ Array.prototype.myForeach = async function (callback, thisArg) {
     await callback.call(_thisArg, _arr[i], i, _arr);
   }
 };
-async function fun(arg: any[]) {
+async function fun11(arg: any[]) {
   //这里也需要使用async await
   // @ts-ignore
   arg.myForeach(async (item) => {
