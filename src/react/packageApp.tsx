@@ -4,6 +4,7 @@
 import React from "react";
 import { Child } from "./package/child";
 import { booleanComp } from "./class/class";
+import { CommonEffect, CommonLayoutEffect } from "./basic/effect";
 
 function App() {
   const b = new booleanComp("name");
@@ -12,9 +13,11 @@ function App() {
   };
   return (
     <>
-      {b.value}
-      <Child />
-      <input type="text" value={b.value} onChange={InputOnChange} />
+      <CommonEffect />
+      <CommonLayoutEffect />
+      {/*{b.value}*/}
+      {/*<Child />*/}
+      {/*<input type="text" value={b.value} onChange={InputOnChange} />*/}
     </>
   );
 }
