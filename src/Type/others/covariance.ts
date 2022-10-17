@@ -30,4 +30,25 @@ let Eg2: DogFn;
 // 反过来可以
 Eg2 = Eg1;
 
+/**
+ * 今天是 1017 复习下逆变 协变
+ * 协变 子类型赋值给父类型
+ * 逆变 父类型转化为子类型
+ *
+ * 依然是不理解的
+ */
+let visitDog = function (arg: dogtype): animal {
+  return {
+    name: arg.name,
+  };
+};
+let visitAnimal = function (arg: animal): dogtype {
+  return {
+    name: arg.name,
+    say: () => {},
+  };
+};
+// 不兼容 类型出错
+// visitAnimal = visitDog;
+visitDog = visitAnimal;
 export {};
