@@ -45,7 +45,8 @@ module.exports = {
 		//webpack配置代理跨域 线上还是要ng
 		proxy: {
 			"/api": {
-				target: "http://localhost:5000",
+				// target: "http://localhost:5000",
+				target: "http://127.0.0.1:4523/m1/1257591-0-default",
 				changeOrigin: true,
 				pathRewrite: {
 					"^/api": "",

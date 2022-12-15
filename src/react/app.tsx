@@ -7,6 +7,7 @@ import Combine from "./redux/combine";
 import { Protal } from "./basic/protal";
 import { Provider } from "react-redux";
 import { store } from "./redux/store/store";
+import { BasicAhooks } from "./ahooks/basic";
 
 function App() {
 	return (
@@ -14,6 +15,7 @@ function App() {
 			this is app component
 			<Combine />
 			<Protal />
+			<BasicAhooks />
 		</Provider>
 	);
 }

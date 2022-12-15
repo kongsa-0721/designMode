@@ -23,5 +23,6 @@ function fn(s) {
 			left.pop();
 		}
 	}
+	return true;
 }
 export { fn };
