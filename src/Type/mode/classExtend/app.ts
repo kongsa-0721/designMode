@@ -4,43 +4,41 @@ import { changeValueAction } from "./action";
 export type DispatchType = (action: any) => void;
 
 interface Comp<viewRuturn = any, dataType = JSONValue> {
-  dispatch: DispatchType;
+	dispatch: DispatchType;
 
-  getView(): viewRuturn;
+	getView(): viewRuturn;
 
-  getPropertyView(): any;
+	getPropertyView(): any;
 
-  reduce(action: any): this;
+	reduce(action: any): this;
 
-  toJsonValue(): dataType;
+	toJsonValue(): dataType;
 }
 
-abstract class AbstractComp<
-  viewRuturn = any,
-  dataType extends JSONValue = JSONValue
-> implements Comp
+abstract class AbstractComp<viewRuturn = any, dataType extends JSONValue = JSONValue>
+	implements Comp
 {
-  dispatch: DispatchType;
+	dispatch: DispatchType;
 
-  constructor(props: { dispatch?: DispatchType; value?: any }) {
-    this.dispatch = props.dispatch
-      ? props.dispatch
-      : (action: any) => {
-          return action;
-        };
-  }
+	constructor(props: { dispatch?: DispatchType; value?: any }) {
+		this.dispatch = props.dispatch
+			? props.dispatch
+			: (action: any) => {
+					return action;
+			  };
+	}
 
-  abstract getPropertyView(): any;
+	abstract getPropertyView(): any;
 
-  abstract getView(): any;
+	abstract getView(): any;
 
-  abstract reduce(action: any): this;
+	abstract reduce(action: any): this;
 
-  abstract toJsonValue(): dataType;
+	abstract toJsonValue(): dataType;
 
-  dispatchChangeValue(value: dataType) {
-    return this.dispatch(changeValueAction(value));
-  }
+	dispatchChangeValue(value: dataType) {
+		return this.dispatch(changeValueAction(value));
+	}
 }
 
 export { AbstractComp };

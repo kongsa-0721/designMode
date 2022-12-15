@@ -32,89 +32,89 @@ instanceof 判断构造函数的prototype是否出现在实例的原型链上
 */
 
 function deepCopy(origin) {
-  let target = Object.create(Object.getPrototypeOf(origin));
-  let stack = [{ origin, target }];
-  let map = new Map();
-  map.set(origin, target);
-  while (stack.length) {
-    const { origin, target } = stack.pop();
-    for (let item of Object.getOwnPropertyNames(origin)) {
-      if (typeof origin[item] === "object" && origin[item] !== null) {
-        if (map.has(origin[item])) {
-          target[item] = map.get(origin[item]);
-        } else {
-          target[item] = Object.create(Object.getPrototypeOf(origin[item]));
-          stack.push({ origin: origin[item], target: target[item] });
-          map.set(origin[item], target[item]);
-        }
-      } else {
-        target[item] = origin[item];
-      }
-    }
-  }
-  return target;
+	let target = Object.create(Object.getPrototypeOf(origin));
+	let stack = [{ origin, target }];
+	let map = new Map();
+	map.set(origin, target);
+	while (stack.length) {
+		const { origin, target } = stack.pop();
+		for (let item of Object.getOwnPropertyNames(origin)) {
+			if (typeof origin[item] === "object" && origin[item] !== null) {
+				if (map.has(origin[item])) {
+					target[item] = map.get(origin[item]);
+				} else {
+					target[item] = Object.create(Object.getPrototypeOf(origin[item]));
+					stack.push({ origin: origin[item], target: target[item] });
+					map.set(origin[item], target[item]);
+				}
+			} else {
+				target[item] = origin[item];
+			}
+		}
+	}
+	return target;
 }
 
 Function.prototype.myCall = function (context, ...args) {
-  context = Object(context || window);
-  const key = Symbol();
-  let fn = this;
-  context[key] = fn;
-  const res = context[key](...args);
-  delete context[key];
-  return res;
+	context = Object(context || window);
+	const key = Symbol();
+	let fn = this;
+	context[key] = fn;
+	const res = context[key](...args);
+	delete context[key];
+	return res;
 };
 
 Function.prototype.myBind = function (context, ...args) {
-  context = Object(context || window);
-  let fn = this;
-  const key = Symbol();
-  function result(...brgs) {
-    if (this instanceof fn) {
-      this[key] = fn;
-      this[key](...args, ...brgs);
-      delete this[key];
-    } else {
-      context[key] = fn;
-      context[key](...args, ...brgs);
-      delete context[key];
-    }
-  }
-  result.prototype = Object.create(Object.getPrototypeOf(fn));
-  return result;
+	context = Object(context || window);
+	let fn = this;
+	const key = Symbol();
+	function result(...brgs) {
+		if (this instanceof fn) {
+			this[key] = fn;
+			this[key](...args, ...brgs);
+			delete this[key];
+		} else {
+			context[key] = fn;
+			context[key](...args, ...brgs);
+			delete context[key];
+		}
+	}
+	result.prototype = Object.create(Object.getPrototypeOf(fn));
+	return result;
 };
 
 async function asyncPool(iterator, fn, max) {
-  let all = [];
-  let excuting = [];
-  for (let item of iterator) {
-    let pItem = Promise.resolve().then(() => fn(item));
-    all.push(pItem);
-    const e = pItem.then(() => excuting.splice(excuting.indexOf(e), 1));
-    excuting.push(e);
-    while (excuting.length >= max) {
-      await Promise.race(excuting);
-    }
-  }
-  return Promise.all(all);
+	let all = [];
+	let excuting = [];
+	for (let item of iterator) {
+		let pItem = Promise.resolve().then(() => fn(item));
+		all.push(pItem);
+		const e = pItem.then(() => excuting.splice(excuting.indexOf(e), 1));
+		excuting.push(e);
+		while (excuting.length >= max) {
+			await Promise.race(excuting);
+		}
+	}
+	return Promise.all(all);
 }
 
 function reTry(fn, times, delay) {
-  return new Promise((res, rej) => {
-    function func() {
-      Promise.resolve(fn())
-        .then((result) => {
-          res(result);
-        })
-        .catch((err) => {
-          if (times === 0) {
-            rej(err);
-          } else {
-            setTimeout(func, delay);
-            times--;
-          }
-        });
-    }
-    func();
-  });
+	return new Promise((res, rej) => {
+		function func() {
+			Promise.resolve(fn())
+				.then((result) => {
+					res(result);
+				})
+				.catch((err) => {
+					if (times === 0) {
+						rej(err);
+					} else {
+						setTimeout(func, delay);
+						times--;
+					}
+				});
+		}
+		func();
+	});
 }

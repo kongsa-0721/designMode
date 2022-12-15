@@ -8,35 +8,35 @@
  * @return {number}
  */
 let rob = function (nums) {
-  let cache = new Array(nums.length).fill(-1);
-  return dfs(nums, nums.length - 1, cache);
+	let cache = new Array(nums.length).fill(-1);
+	return dfs(nums, nums.length - 1, cache);
 };
 
 function dfs(nums, index, cache) {
-  if (index < 0) {
-    return 0;
-  }
-  if (cache[index] !== -1) {
-    return cache[index];
-  }
-  let sum1 = dfs(nums, index - 1, cache);
-  let sum2 = dfs(nums, index - 2, cache) + nums[index];
-  let res = Math.max(sum1, sum2);
-  cache[index] = res;
-  return res;
+	if (index < 0) {
+		return 0;
+	}
+	if (cache[index] !== -1) {
+		return cache[index];
+	}
+	let sum1 = dfs(nums, index - 1, cache);
+	let sum2 = dfs(nums, index - 2, cache) + nums[index];
+	let res = Math.max(sum1, sum2);
+	cache[index] = res;
+	return res;
 }
 let rob1 = function (nums) {
-  //两个数的情况 进不去for循环 在这里就判断了好了
-  if (nums.length === 2) {
-    return Math.max(nums[0], nums[1]);
-  }
-  let cache = new Array(nums.length).fill(-1);
-  cache[0] = nums[0];
-  // 2 1 1 2 这个时候前两个最大的是2 nums[1]就要拿 2 手动添加下
-  cache[1] = Math.max(nums[0], nums[1]);
-  for (let i = 2; i < nums.length; i++) {
-    cache[i] = Math.max(cache[i - 1], cache[i - 2] + nums[i]);
-  }
-  return cache[nums.length - 1];
+	//两个数的情况 进不去for循环 在这里就判断了好了
+	if (nums.length === 2) {
+		return Math.max(nums[0], nums[1]);
+	}
+	let cache = new Array(nums.length).fill(-1);
+	cache[0] = nums[0];
+	// 2 1 1 2 这个时候前两个最大的是2 nums[1]就要拿 2 手动添加下
+	cache[1] = Math.max(nums[0], nums[1]);
+	for (let i = 2; i < nums.length; i++) {
+		cache[i] = Math.max(cache[i - 1], cache[i - 2] + nums[i]);
+	}
+	return cache[nums.length - 1];
 };
 console.log(rob1([2, 1, 1, 2]));

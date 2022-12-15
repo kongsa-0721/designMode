@@ -13,29 +13,29 @@
  * @return {number}
  */
 let maxProfit = function (prices) {
-  if (prices.length < 2) return 0;
-  let res = 0,
-    minPirce = prices[0];
-  for (let i = 1; i < prices.length; i++) {
-    res = Math.max(res, prices[i] - minPirce);
-    minPirce = Math.min(minPirce, prices[i]);
-  }
-  return res;
+	if (prices.length < 2) return 0;
+	let res = 0,
+		minPirce = prices[0];
+	for (let i = 1; i < prices.length; i++) {
+		res = Math.max(res, prices[i] - minPirce);
+		minPirce = Math.min(minPirce, prices[i]);
+	}
+	return res;
 };
 
 let maxTable = function (prices) {
-  if (prices.length < 2) return 0;
-  let dp = new Array(prices.length).fill(0);
-  let minPrice = prices[0];
-  for (let i = 1; i < prices.length; i++) {
-    if (prices[i] < minPrice) {
-      minPrice = prices[i];
-    }
-    if (prices[i] - minPrice > dp[i]) {
-      dp[i] = prices[i] - minPrice;
-    } else {
-      dp[i] = dp[i - 1];
-    }
-  }
-  return Math.max(...dp);
+	if (prices.length < 2) return 0;
+	let dp = new Array(prices.length).fill(0);
+	let minPrice = prices[0];
+	for (let i = 1; i < prices.length; i++) {
+		if (prices[i] < minPrice) {
+			minPrice = prices[i];
+		}
+		if (prices[i] - minPrice > dp[i]) {
+			dp[i] = prices[i] - minPrice;
+		} else {
+			dp[i] = dp[i - 1];
+		}
+	}
+	return Math.max(...dp);
 };

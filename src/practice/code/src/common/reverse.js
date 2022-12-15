@@ -2,16 +2,16 @@
  * Created by KongSa on 2022/9/6-1:43 PM.
  */
 function isReverse(str) {
-  let left = 0,
-    right = str.length - 1;
-  while (left <= right) {
-    if (str[left] === str[right]) {
-      continue;
-    } else {
-      return false;
-    }
-  }
-  return true;
+	let left = 0,
+		right = str.length - 1;
+	while (left <= right) {
+		if (str[left] === str[right]) {
+			continue;
+		} else {
+			return false;
+		}
+	}
+	return true;
 }
 console.log(isReverse("qwq"));
 /**

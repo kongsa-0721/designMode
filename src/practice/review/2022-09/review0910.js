@@ -11,36 +11,36 @@
  * 事件委托 一个ul下面有很多li标签 不能给每一个li标签都添加一个事件处理函数 就在父元素上添加事件处理函数 判断e.target是哪一个 触发对应的操作
  */
 function debounce(fn, time, now) {
-  let t = null;
-  return function () {
-    if (t) {
-      clearTimeout(t);
-    }
-    if (now) {
-      let first = !t;
-      if (first) {
-        fn.apply(this, arguments);
-      }
-      t = setTimeout(() => {
-        t = null;
-      }, time);
-    } else {
-      t = setTimeout(() => {
-        fn.apply(this, arguments);
-      }, time);
-    }
-  };
+	let t = null;
+	return function () {
+		if (t) {
+			clearTimeout(t);
+		}
+		if (now) {
+			let first = !t;
+			if (first) {
+				fn.apply(this, arguments);
+			}
+			t = setTimeout(() => {
+				t = null;
+			}, time);
+		} else {
+			t = setTimeout(() => {
+				fn.apply(this, arguments);
+			}, time);
+		}
+	};
 }
 
 function throttle(fn, time) {
-  let begin = 0;
-  return function () {
-    let now = new Date().getTime();
-    if (now - begin > time) {
-      fn.apply(this, arguments);
-      begin = now;
-    }
-  };
+	let begin = 0;
+	return function () {
+		let now = new Date().getTime();
+		if (now - begin > time) {
+			fn.apply(this, arguments);
+			begin = now;
+		}
+	};
 }
 /**
  * this 是在运行时 基于函数的执行环境所绑定的
@@ -49,27 +49,27 @@ function throttle(fn, time) {
  */
 
 function myInstance(obj, target) {
-  if (!target || !obj || typeof obj !== "object") {
-    return false;
-  }
-  if (Object.getPrototypeOf(obj) === target.prototype) {
-    return true;
-  } else {
-    return myInstance(Object.getPrototypeOf(obj), target);
-  }
+	if (!target || !obj || typeof obj !== "object") {
+		return false;
+	}
+	if (Object.getPrototypeOf(obj) === target.prototype) {
+		return true;
+	} else {
+		return myInstance(Object.getPrototypeOf(obj), target);
+	}
 }
 Function.prototype.myCall = function (target, ...rest) {
-  let thisArg = Object(target || window);
-  let uniqueKey = Symbol();
-  context[uniqueKey] = this;
-  let res = context[uniqueKey]();
-  delete context[uniqueKey];
-  return res;
+	let thisArg = Object(target || window);
+	let uniqueKey = Symbol();
+	context[uniqueKey] = this;
+	let res = context[uniqueKey]();
+	delete context[uniqueKey];
+	return res;
 };
 function myNew(fn, ...rest) {
-  let obj = Object.create(fn.prototype);
-  let res = fn.call(...rest);
-  return typeof res !== "object" ? obj : res;
+	let obj = Object.create(fn.prototype);
+	let res = fn.call(...rest);
+	return typeof res !== "object" ? obj : res;
 }
 /**
  * weakMap/Set
@@ -79,31 +79,31 @@ function myNew(fn, ...rest) {
  * 可以用在 闭包缓存 存储dom节点
  */
 function cache(fn, resolver) {
-  let cache = new Map();
-  return function () {
-    let cacheKey = resolver ? resolver(arguments) : Array.prototype.join("_");
-    let cacheMap = cache.get(cacheKey);
-    if (!cacheMap) {
-      let value = fn.apply(this, arguments);
-      cache.set(cacheKey, new WeakMap.set(this, value));
-      return value;
-    }
-    if (cacheMap.has(this)) {
-      console.log("命中缓存");
-      return cacheMap.get(this);
-    }
-    let value = fn.apply(this, arguments);
-    cacheMap.set(this, value);
-    return value;
-  };
+	let cache = new Map();
+	return function () {
+		let cacheKey = resolver ? resolver(arguments) : Array.prototype.join("_");
+		let cacheMap = cache.get(cacheKey);
+		if (!cacheMap) {
+			let value = fn.apply(this, arguments);
+			cache.set(cacheKey, new WeakMap.set(this, value));
+			return value;
+		}
+		if (cacheMap.has(this)) {
+			console.log("命中缓存");
+			return cacheMap.get(this);
+		}
+		let value = fn.apply(this, arguments);
+		cacheMap.set(this, value);
+		return value;
+	};
 }
 Array.prototype.myForeach = async function (fn, context) {
-  //使foreach支持异步 先获取this 还有当前操作的arr 每一次执行fn的时候await一下
-  let thisArg = Object(context || window);
-  let arr = this;
-  for (let i = 0; i < arr.length; i++) {
-    await fn.call(thisArg, arr[i], i, arr);
-  }
+	//使foreach支持异步 先获取this 还有当前操作的arr 每一次执行fn的时候await一下
+	let thisArg = Object(context || window);
+	let arr = this;
+	for (let i = 0; i < arr.length; i++) {
+		await fn.call(thisArg, arr[i], i, arr);
+	}
 };
 /**
  * 把源函数保存起来 重写setTimeout函数
@@ -113,33 +113,33 @@ Array.prototype.myForeach = async function (fn, context) {
 let originTime = setTimeout;
 let stack = new Set();
 setTimeout = function (fn, timer) {
-  let t = originTime(fn, timer);
-  stack.add(t);
-  return t;
+	let t = originTime(fn, timer);
+	stack.add(t);
+	return t;
 };
 function clearAll() {
-  stack.forEach((t) => {
-    clearTimeout(t);
-    stack.delete(t);
-  });
+	stack.forEach((t) => {
+		clearTimeout(t);
+		stack.delete(t);
+	});
 }
 function all(iterator) {
-  return new Promise((resolve, reject) => {
-    let result = [];
-    let count = 0;
-    for (let item of iterator) {
-      Promise.resolve(item)
-        .then((res) => {
-          result.push(res);
-          if (count++ === iterator.length) {
-            resolve(result);
-          }
-        })
-        .catch((e) => {
-          reject(e);
-        });
-    }
-  });
+	return new Promise((resolve, reject) => {
+		let result = [];
+		let count = 0;
+		for (let item of iterator) {
+			Promise.resolve(item)
+				.then((res) => {
+					result.push(res);
+					if (count++ === iterator.length) {
+						resolve(result);
+					}
+				})
+				.catch((e) => {
+					reject(e);
+				});
+		}
+	});
 }
 /**
  * 初始化一个正在执行的数组 把limit个实例放到数组里面
@@ -147,34 +147,34 @@ function all(iterator) {
  * 使用 Promise.all 返回执行过的所有结果
  */
 async function currency(iterator, max, fn) {
-  let ret = [];
-  let excuting = [];
-  for (const item of iterator) {
-    const pItem = Promise.resolve().then(() => fn(item));
-    ret.push(pItem);
-    const e = pItem.then(() => {
-      excuting.splice(excuting.indexOf(e), 1);
-    });
-    excuting.push(e);
-    if (excuting.length >= max) {
-      await Promise.race(excuting);
-    }
-  }
-  return Promise.all(ret);
+	let ret = [];
+	let excuting = [];
+	for (const item of iterator) {
+		const pItem = Promise.resolve().then(() => fn(item));
+		ret.push(pItem);
+		const e = pItem.then(() => {
+			excuting.splice(excuting.indexOf(e), 1);
+		});
+		excuting.push(e);
+		if (excuting.length >= max) {
+			await Promise.race(excuting);
+		}
+	}
+	return Promise.all(ret);
 }
 function timeout(i) {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(i);
-    }, i);
-  }).then((e) => {
-    console.log(e);
-    return e;
-  });
+	return new Promise((resolve) => {
+		setTimeout(() => {
+			resolve(i);
+		}, i);
+	}).then((e) => {
+		console.log(e);
+		return e;
+	});
 }
 (async function () {
-  const res = await currency([1000, 1000, 1000, 2000], 2, timeout);
-  console.log(res);
+	const res = await currency([1000, 1000, 1000, 2000], 2, timeout);
+	console.log(res);
 })();
 /**
  * http状态码
@@ -191,24 +191,24 @@ function timeout(i) {
  */
 let target = {};
 let origin = {
-  a: "kongsa",
-  b: {
-    name: "春丹",
-    arr: [1, 2, 3, 4, 5],
-  },
+	a: "kongsa",
+	b: {
+		name: "春丹",
+		arr: [1, 2, 3, 4, 5],
+	},
 };
 function deepClone(origin, target) {
-  for (let item in origin) {
-    if (origin[item] instanceof Array) {
-      target[item] = [];
-      deepClone(origin[item], target[item]);
-    } else if (origin[item] instanceof Object) {
-      target[item] = {};
-      deepClone(origin[item], target[item]);
-    } else {
-      target[item] = origin[item];
-    }
-  }
+	for (let item in origin) {
+		if (origin[item] instanceof Array) {
+			target[item] = [];
+			deepClone(origin[item], target[item]);
+		} else if (origin[item] instanceof Object) {
+			target[item] = {};
+			deepClone(origin[item], target[item]);
+		} else {
+			target[item] = origin[item];
+		}
+	}
 }
 //能完成最基本的任务
 deepClone(origin, target);

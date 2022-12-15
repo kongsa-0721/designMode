@@ -7,26 +7,26 @@
  * @return {string[]}
  */
 let generateParenthesis = function (n) {
-  if (n == 0) {
-    return [];
-  }
-  if (n === 1) {
-    return ["()"];
-  }
-  let res = [];
-  function dfs(left, right, str) {
-    if (left === n && right === n) {
-      res.push(str);
-      return;
-    }
-    //剪枝
-    if (left > n || left < right) {
-      return;
-    }
-    dfs(left + 1, right, str + "(");
-    dfs(left, right + 1, str + ")");
-  }
-  dfs(0, 0, "");
-  return res;
+	if (n == 0) {
+		return [];
+	}
+	if (n === 1) {
+		return ["()"];
+	}
+	let res = [];
+	function dfs(left, right, str) {
+		if (left === n && right === n) {
+			res.push(str);
+			return;
+		}
+		//剪枝
+		if (left > n || left < right) {
+			return;
+		}
+		dfs(left + 1, right, str + "(");
+		dfs(left, right + 1, str + ")");
+	}
+	dfs(0, 0, "");
+	return res;
 };
 console.log(generateParenthesis(3));

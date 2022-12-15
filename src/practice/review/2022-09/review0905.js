@@ -2,39 +2,39 @@
  * Created by KongSa on 2022/9/5-7:43 PM.
  */
 function debounce(fn, time, now) {
-  let t = null;
-  return function () {
-    if (t) {
-      clearTimeout(t);
-    }
-    t = setTimeout(() => {
-      fn.apply(this, arguments);
-    }, time);
-  };
+	let t = null;
+	return function () {
+		if (t) {
+			clearTimeout(t);
+		}
+		t = setTimeout(() => {
+			fn.apply(this, arguments);
+		}, time);
+	};
 }
 
 function throttle(fn, time) {
-  let begin = 0;
-  return function () {
-    let now = new Date().getTime();
-    if (now - begin > time) {
-      fn.apply(this, arguments);
-      begin = now;
-    }
-  };
+	let begin = 0;
+	return function () {
+		let now = new Date().getTime();
+		if (now - begin > time) {
+			fn.apply(this, arguments);
+			begin = now;
+		}
+	};
 }
 function myInstance(obj, target) {
-  if (!obj || typeof obj !== "object") {
-    return false;
-  }
-  if (!target.prototype) {
-    throw Error;
-  }
-  if (Object.getPrototypeOf(obj) === target.prototype) {
-    return true;
-  } else {
-    return myInstance(Object.getPrototypeOf(obj), target);
-  }
+	if (!obj || typeof obj !== "object") {
+		return false;
+	}
+	if (!target.prototype) {
+		throw Error;
+	}
+	if (Object.getPrototypeOf(obj) === target.prototype) {
+		return true;
+	} else {
+		return myInstance(Object.getPrototypeOf(obj), target);
+	}
 }
 /**
  * this 是在运行时基于函数的执行环境绑定的
@@ -45,66 +45,66 @@ function myInstance(obj, target) {
  * */
 
 function myNew(fn, ...rest) {
-  let obj = Object.create(fn.prototype);
-  let res = fn.apply(obj, rest);
-  return typeof res === "object" ? res : obj;
+	let obj = Object.create(fn.prototype);
+	let res = fn.apply(obj, rest);
+	return typeof res === "object" ? res : obj;
 }
 
 function whichType(obj) {
-  if (obj == null) {
-    return obj + "";
-  }
-  return typeof obj === "object" || "function"
-    ? Object.prototype.toString.call(obj)
-    : typeof obj;
+	if (obj == null) {
+		return obj + "";
+	}
+	return typeof obj === "object" || "function"
+		? Object.prototype.toString.call(obj)
+		: typeof obj;
 }
 Function.prototype.myCall = function (context, ...rest) {
-  context = Object(context || window);
-  const Key = new Symbol();
-  context[Key] = this;
-  const res = context[Key](...rest);
-  delete context[Key];
-  return res;
+	context = Object(context || window);
+	const Key = new Symbol();
+	context[Key] = this;
+	const res = context[Key](...rest);
+	delete context[Key];
+	return res;
 };
 for (var i = 0; i < 5; i++) {
-  (function (i) {
-    setTimeout(() => {
-      console.log(i);
-    }, i * 1000);
-  })(i);
+	(function (i) {
+		setTimeout(() => {
+			console.log(i);
+		}, i * 1000);
+	})(i);
 }
 function sleep(ms) {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve();
-    }, ms);
-  });
+	return new Promise((resolve) => {
+		setTimeout(() => {
+			resolve();
+		}, ms);
+	});
 }
 async function ddo() {
-  for (let i = 0; i < 5; i++) {
-    await sleep(1000).then(() => console.log(i));
-  }
+	for (let i = 0; i < 5; i++) {
+		await sleep(1000).then(() => console.log(i));
+	}
 }
 //将forEach重写 改成可异步迭代的
 Array.prototype.myForeach = async function (callback, thisArg) {
-  thisArg = Object(thisArg || window);
-  let toBeArr = this;
-  for (let i = 0; i < toBeArr.length; i++) {
-    await callback.call(thisArg, toBeArr[i], i, toBeArr);
-  }
+	thisArg = Object(thisArg || window);
+	let toBeArr = this;
+	for (let i = 0; i < toBeArr.length; i++) {
+		await callback.call(thisArg, toBeArr[i], i, toBeArr);
+	}
 };
 // ddo();
 function pp() {}
 let p1 = new pp();
 let protoArr = [
-  Function.prototype.__proto__ === Object.prototype,
-  Function.__proto__ === Function.prototype,
-  Object.__proto__ === Function.prototype,
-  pp.__proto__ === Function.prototype,
-  p1.__proto__ === pp.prototype,
+	Function.prototype.__proto__ === Object.prototype,
+	Function.__proto__ === Function.prototype,
+	Object.__proto__ === Function.prototype,
+	pp.__proto__ === Function.prototype,
+	p1.__proto__ === pp.prototype,
 ];
 protoArr.forEach((e) => {
-  console.log(e);
+	console.log(e);
 });
 /**
  * es6
@@ -130,104 +130,104 @@ protoArr.forEach((e) => {
 const originTime = window.setTimeout;
 let timeStack = new Set();
 window.setTimeout = function (fn, time, ...args) {
-  let timer = originTime(fn, time, ...args);
-  timeStack.add(timer);
-  return timer;
+	let timer = originTime(fn, time, ...args);
+	timeStack.add(timer);
+	return timer;
 };
 function clearAll() {
-  timeStack.forEach((e) => {
-    clearTimeout(e);
-    timeStack.delete(e);
-  });
+	timeStack.forEach((e) => {
+		clearTimeout(e);
+		timeStack.delete(e);
+	});
 }
 
 class Com {
-  static PEDING = "peding";
-  static RESOLVE = "resolve";
-  static REJECT = "reject";
-  status = null;
-  result = null;
-  FullStack = [];
-  FailStack = [];
-  constructor(fn) {
-    this.status = Com.PEDING;
-    try {
-      fn(this.resolve.bind(this), this.reject.bind(this));
-    } catch (e) {
-      this.reject(e);
-    }
-  }
-  resolve(res) {
-    setTimeout(() => {
-      if (this.status === Com.PEDING) {
-        this.status = Com.RESOLVE;
-        this.result = res;
-        this.FullStack.forEach((e) => {
-          e(this.result);
-        });
-      }
-    });
-  }
-  reject(res) {
-    setTimeout(() => {
-      if (this.status === Com.PEDING) {
-        this.status = Com.REJECT;
-        this.result = res;
-        this.FailStack.forEach((e) => {
-          e(this.result);
-        });
-      }
-    });
-  }
-  then(onFilled, onReject) {
-    return new Com(() => {
-      if (this.status === Com.PEDING) {
-        this.FullStack.push(onFilled);
-        this.FailStack.push(onReject);
-      }
-      if (this.status === Com.RESOLVE) {
-        onFilled(this.result);
-      }
+	static PEDING = "peding";
+	static RESOLVE = "resolve";
+	static REJECT = "reject";
+	status = null;
+	result = null;
+	FullStack = [];
+	FailStack = [];
+	constructor(fn) {
+		this.status = Com.PEDING;
+		try {
+			fn(this.resolve.bind(this), this.reject.bind(this));
+		} catch (e) {
+			this.reject(e);
+		}
+	}
+	resolve(res) {
+		setTimeout(() => {
+			if (this.status === Com.PEDING) {
+				this.status = Com.RESOLVE;
+				this.result = res;
+				this.FullStack.forEach((e) => {
+					e(this.result);
+				});
+			}
+		});
+	}
+	reject(res) {
+		setTimeout(() => {
+			if (this.status === Com.PEDING) {
+				this.status = Com.REJECT;
+				this.result = res;
+				this.FailStack.forEach((e) => {
+					e(this.result);
+				});
+			}
+		});
+	}
+	then(onFilled, onReject) {
+		return new Com(() => {
+			if (this.status === Com.PEDING) {
+				this.FullStack.push(onFilled);
+				this.FailStack.push(onReject);
+			}
+			if (this.status === Com.RESOLVE) {
+				onFilled(this.result);
+			}
 
-      if (this.status === Com.REJECT) {
-        onReject(this.result);
-      }
-    });
-  }
-  static all(iterator) {
-    return new Promise((res, rej) => {
-      if (iterator.length === 0) {
-        res([]);
-      }
-      let result = [];
-      let count = 0;
-      for (let i = 0; i < iterator.length; i++) {
-        Promise.resolve(iterator[i])
-          .then((res) => {
-            result[i] = res;
-          })
-          .catch((e) => {
-            rej(e);
-          });
-        if (++count === iterator.length) {
-          res(result);
-        }
-      }
-    });
-  }
-  static race(iterator) {
-    return new Promise((res, rej) => {
-      for (let item of iterator) {
-        Promise.resolve(item)
-          .then((result) => {
-            res(result);
-          })
-          .catch((e) => {
-            rej(e);
-          });
-      }
-    });
-  }
+			if (this.status === Com.REJECT) {
+				onReject(this.result);
+			}
+		});
+	}
+	static all(iterator) {
+		return new Promise((res, rej) => {
+			if (iterator.length === 0) {
+				res([]);
+			}
+			let result = [];
+			let count = 0;
+			for (let i = 0; i < iterator.length; i++) {
+				Promise.resolve(iterator[i])
+					.then((res) => {
+						result[i] = res;
+					})
+					.catch((e) => {
+						rej(e);
+					});
+				if (++count === iterator.length) {
+					res(result);
+				}
+			}
+		});
+	}
+	static race(iterator) {
+		return new Promise((res, rej) => {
+			for (let item of iterator) {
+				Promise.resolve(item)
+					.then((result) => {
+						res(result);
+					})
+					.catch((e) => {
+						rej(e);
+					});
+			}
+		});
+	}
 }
 
 /**

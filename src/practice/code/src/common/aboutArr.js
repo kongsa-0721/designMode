@@ -8,11 +8,11 @@ let arr = [1, 2, 3, 6, 2, 3, 1, 3, 3, 4, 2, 4, 3, 4, 2, 1];
  * @param base 基准值
  */
 function sliceArr(arr, base) {
-  let resArr = [];
-  for (let i = 0; i < arr.length; i += base) {
-    resArr.push(arr.slice(i, i + base));
-  }
-  return resArr;
+	let resArr = [];
+	for (let i = 0; i < arr.length; i += base) {
+		resArr.push(arr.slice(i, i + base));
+	}
+	return resArr;
 }
 console.log(sliceArr(arr, 4));
 /**
@@ -21,11 +21,11 @@ console.log(sliceArr(arr, 4));
  * @param depth 深度 默认为1
  */
 function flatArr(arr, depth = 1) {
-  return arr.reduce((total, cur) => {
-    return Array.isArray(cur) && depth
-      ? [...total, ...flatArr(cur, depth - 1)]
-      : [...total, ...[cur]];
-  }, []);
+	return arr.reduce((total, cur) => {
+		return Array.isArray(cur) && depth
+			? [...total, ...flatArr(cur, depth - 1)]
+			: [...total, ...[cur]];
+	}, []);
 }
 console.log(flatArr(sliceArr(arr, 4)));
 /**
@@ -33,17 +33,17 @@ console.log(flatArr(sliceArr(arr, 4)));
  * @param arr
  */
 function noRepeat(arr) {
-  if (arr.length < 10) {
-    return [...new Set(arr)];
-  } else {
-    let newArr = [];
-    for (let item of arr) {
-      if (newArr.indexOf(item) === -1) {
-        newArr.push(item);
-      }
-    }
-    return newArr;
-  }
+	if (arr.length < 10) {
+		return [...new Set(arr)];
+	} else {
+		let newArr = [];
+		for (let item of arr) {
+			if (newArr.indexOf(item) === -1) {
+				newArr.push(item);
+			}
+		}
+		return newArr;
+	}
 }
 console.log(noRepeat(arr));
 /**
@@ -52,21 +52,21 @@ console.log(noRepeat(arr));
  * @param num
  */
 function foboniccy(num) {
-  if (num < 10) {
-    let pre = 1,
-      mid = 1;
-    let res = 0;
-    for (let i = 0; i < num - 2; i++) {
-      res = pre + mid;
-      mid = pre;
-      pre = res;
-    }
-    return res;
-  } else {
-    while (num > 2) {
-      return foboniccy(num - 2) + foboniccy(num - 1);
-    }
-    return 1;
-  }
+	if (num < 10) {
+		let pre = 1,
+			mid = 1;
+		let res = 0;
+		for (let i = 0; i < num - 2; i++) {
+			res = pre + mid;
+			mid = pre;
+			pre = res;
+		}
+		return res;
+	} else {
+		while (num > 2) {
+			return foboniccy(num - 2) + foboniccy(num - 1);
+		}
+		return 1;
+	}
 }
 console.log(foboniccy(6));

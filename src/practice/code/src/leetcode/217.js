@@ -8,33 +8,33 @@
  * 哈希表 效率还不错的
  */
 let containsDuplicateHack = function (nums) {
-  //注意返回值 是一个boolean 判断边界
-  if (!nums || nums.length === 0) {
-    return false;
-  }
-  if (nums.length === 1) {
-    return false;
-  }
-  let set = new Set(nums);
-  if (set.size !== nums.length) {
-    return true;
-  }
-  return false;
+	//注意返回值 是一个boolean 判断边界
+	if (!nums || nums.length === 0) {
+		return false;
+	}
+	if (nums.length === 1) {
+		return false;
+	}
+	let set = new Set(nums);
+	if (set.size !== nums.length) {
+		return true;
+	}
+	return false;
 };
 //排序做法 但是效率并不好
 let containsDuplicate = function (nums) {
-  if (!nums || nums.length === 0) {
-    return false;
-  }
-  if (nums.length === 1) {
-    return false;
-  }
-  //通过排序 然后判断
-  let arr = nums.sort((a, b) => a - b);
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i] === arr[i + 1]) {
-      return true;
-    }
-  }
-  return false;
+	if (!nums || nums.length === 0) {
+		return false;
+	}
+	if (nums.length === 1) {
+		return false;
+	}
+	//通过排序 然后判断
+	let arr = nums.sort((a, b) => a - b);
+	for (let i = 0; i < arr.length; i++) {
+		if (arr[i] === arr[i + 1]) {
+			return true;
+		}
+	}
+	return false;
 };

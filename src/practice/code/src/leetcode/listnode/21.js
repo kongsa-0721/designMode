@@ -15,18 +15,18 @@
  * @return {ListNode}
  */
 let mergeTwoLists = function (list1, list2) {
-  let res = new ListNode(0);
-  let ret = res;
-  while (list1 !== null && list2 !== null) {
-    if (list1.val <= list2.val) {
-      ret.next = list1;
-      list1 = list1.next;
-    } else {
-      ret.next = list2;
-      list2 = list2.next;
-    }
-    ret = ret.next;
-  }
-  ret.next = list1 != null ? list1 : list2;
-  return ret.next;
+	let res = new ListNode(0);
+	let ret = res;
+	while (list1 !== null && list2 !== null) {
+		if (list1.val <= list2.val) {
+			ret.next = list1;
+			list1 = list1.next;
+		} else {
+			ret.next = list2;
+			list2 = list2.next;
+		}
+		ret = ret.next;
+	}
+	ret.next = list1 != null ? list1 : list2;
+	return ret.next;
 };

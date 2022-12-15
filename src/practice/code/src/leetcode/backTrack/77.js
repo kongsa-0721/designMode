@@ -10,21 +10,21 @@
  * @return {number[][]}
  */
 let combine = function (n, k) {
-  let ret = [];
-  let excuting = new Array(n);
-  for (let i = 0; i < excuting.length; i++) {
-    excuting[i] = i + 1;
-  }
-  function backTrack(arr, index) {
-    if (arr.length === k) {
-      ret.push(arr.slice());
-    }
-    for (let i = index; i < excuting.length; i++) {
-      arr.push(excuting[i]);
-      backTrack(arr, i + 1);
-      arr.pop();
-    }
-  }
-  backTrack([], 0);
-  return ret;
+	let ret = [];
+	let excuting = new Array(n);
+	for (let i = 0; i < excuting.length; i++) {
+		excuting[i] = i + 1;
+	}
+	function backTrack(arr, index) {
+		if (arr.length === k) {
+			ret.push(arr.slice());
+		}
+		for (let i = index; i < excuting.length; i++) {
+			arr.push(excuting[i]);
+			backTrack(arr, i + 1);
+			arr.pop();
+		}
+	}
+	backTrack([], 0);
+	return ret;
 };

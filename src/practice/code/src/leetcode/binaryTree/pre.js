@@ -7,16 +7,16 @@ tree.insert([1, 2, 3, 4, 3, 8, 7, 5, 10, 12, 11, null, null, null]);
 
 //前序遍历
 let Traversal = function (root) {
-  return backTrack(root, []);
+	return backTrack(root, []);
 };
 function backTrack(root, res) {
-  if (!root) return root;
-  res.push(root.val);
-  backTrack(root.left, res);
-  //中序
-  backTrack(root.right, res);
-  //后序
-  return res;
+	if (!root) return root;
+	res.push(root.val);
+	backTrack(root.left, res);
+	//中序
+	backTrack(root.right, res);
+	//后序
+	return res;
 }
 let arr = Traversal(tree).sort((a, b) => a - b);
 
@@ -29,15 +29,15 @@ let arr = Traversal(tree).sort((a, b) => a - b);
  * @param root
  */
 let preorderTraversal = function (root) {
-  let res = [];
-  if (!root) return res;
-  let stack = [root];
-  while (stack.length) {
-    //更通用的写法是放一个标识位置 null 根据这个null来判断
-    let node = stack.pop();
-    res.push(node.val);
-    node.right && stack.push(node.right);
-    node.left && stack.push(node.left);
-  }
-  return res;
+	let res = [];
+	if (!root) return res;
+	let stack = [root];
+	while (stack.length) {
+		//更通用的写法是放一个标识位置 null 根据这个null来判断
+		let node = stack.pop();
+		res.push(node.val);
+		node.right && stack.push(node.right);
+		node.left && stack.push(node.left);
+	}
+	return res;
 };

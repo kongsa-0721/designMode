@@ -7,29 +7,29 @@
  * 4潜水王 啥都不干
  */
 function resolve(n, ...rest) {
-  let dianZan = 0;
-  let reply = 0;
-  for (let i = 0; i < rest.length; i++) {
-    if (rest[i] === 1) {
-      reply++;
-    }
-    if (rest[i] === 2) {
-      dianZan++;
-    }
-    if (rest[i] === 3) {
-      if (reply > dianZan) {
-        reply++;
-      } else if (dianZan > reply) {
-        dianZan++;
-      } else {
-        dianZan++;
-        reply++;
-      }
-    }
-    if (rest[i] === 4) {
-      continue;
-    }
-  }
-  return [(dianZan * n) / 4, (reply * n) / 4];
+	let dianZan = 0;
+	let reply = 0;
+	for (let i = 0; i < rest.length; i++) {
+		if (rest[i] === 1) {
+			reply++;
+		}
+		if (rest[i] === 2) {
+			dianZan++;
+		}
+		if (rest[i] === 3) {
+			if (reply > dianZan) {
+				reply++;
+			} else if (dianZan > reply) {
+				dianZan++;
+			} else {
+				dianZan++;
+				reply++;
+			}
+		}
+		if (rest[i] === 4) {
+			continue;
+		}
+	}
+	return [(dianZan * n) / 4, (reply * n) / 4];
 }
 console.log(resolve(4, 1, 2, 3, 4));

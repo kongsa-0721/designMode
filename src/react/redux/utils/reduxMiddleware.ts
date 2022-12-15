@@ -22,11 +22,11 @@
  * @param store
  */
 export const logger = (store: any) => (next: any) => (action: any) => {
-  console.group(action.type);
-  console.info("dispatching", action);
-  //result 就是派发之后的state
-  let result = next(action);
-  console.log("next state", store.getState());
-  console.groupEnd();
-  return result;
+	console.group(action.type);
+	console.info("dispatching", action);
+	//result 就是派发之后的state
+	const result = next(action);
+	console.log("next state", store.getState());
+	console.groupEnd();
+	return result;
 };

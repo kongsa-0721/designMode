@@ -3,25 +3,25 @@
  */
 // 实现洋葱模式 函数嵌套执行
 function compose(...rest) {
-  if (rest.length === 0) {
-    return (arg) => arg;
-  }
-  if (rest.length === 1) {
-    return rest[0];
-  }
-  return rest.reduce((a, b) => {
-    return (...arg) => a(b(...arg));
-  });
+	if (rest.length === 0) {
+		return (arg) => arg;
+	}
+	if (rest.length === 1) {
+		return rest[0];
+	}
+	return rest.reduce((a, b) => {
+		return (...arg) => a(b(...arg));
+	});
 }
 let a = (...argA) => {
-  argA.forEach((e, index, arr) => {
-    arr[index] = e + 1;
-  });
-  return argA;
+	argA.forEach((e, index, arr) => {
+		arr[index] = e + 1;
+	});
+	return argA;
 };
 let b = (...argB) => {
-  console.log(argB);
-  return argB.reduce((a, b) => a + b);
+	console.log(argB);
+	return argB.reduce((a, b) => a + b);
 };
 console.log(compose(a, b)(1, 1, 1, 1, 1));
 /**

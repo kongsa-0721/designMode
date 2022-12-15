@@ -7,12 +7,12 @@
  * p2: {cat?: string, dog?: string}
  */
 type partial<T> = {
-  [p in keyof T]?: T[p];
+	[p in keyof T]?: T[p];
 };
 
 type p1 = {
-  cat: string;
-  dog: string;
+	cat: string;
+	dog: string;
 };
 //Initial type: {cat?: string, dog?: string}
 type p2 = partial<p1>;
@@ -22,7 +22,7 @@ type p3 = p1["cat"];
 // ---------------partial 把指定的key变为可选类型--------------------
 // 把P约束为T的每一个key K in P 遍历 P
 type partial1<T, P extends keyof T> = {
-  [K in P]?: T[K];
+	[K in P]?: T[K];
 };
 
 type p4 = partial1<p1, "cat">;
@@ -30,7 +30,7 @@ type p4 = partial1<p1, "cat">;
 // -------------------Readonly-------------------------
 
 type Read<T> = {
-  readonly [P in keyof T]: T[P];
+	readonly [P in keyof T]: T[P];
 };
 //Initial type: {readonly cat: string, readonly dog: string}
 type p5 = Read<p1>;
@@ -38,7 +38,7 @@ type p5 = Read<p1>;
 // --------------------Pick-------------------------
 
 type pick<T, P extends keyof T> = {
-  [K in P]: T[K];
+	[K in P]: T[K];
 };
 
 type p6 = { bug: string; fix: string };
@@ -48,12 +48,12 @@ type p7 = pick<p6, "bug">;
 // --------------------Record ------------------------
 
 type record<T extends keyof any, P> = {
-  [K in T]: P;
+	[K in T]: P;
 };
 
 type p8 = {
-  name?: string;
-  age: number;
+	name?: string;
+	age: number;
 };
 
 type p9 = record<"a" | "b", p8>;
@@ -68,7 +68,7 @@ type p11 = keyof p10;
 //--------------------Return type---------------------
 
 function fnn() {
-  return { x: 5, y: 5 };
+	return { x: 5, y: 5 };
 }
 
 type p12 = typeof fnn;
@@ -78,16 +78,16 @@ type p13 = ReturnType<p12>;
 //-------------------indexed access type----------------
 
 const MyArray = [
-  { name: "Alice", age: 15 },
-  { name: "Bob", age: 23 },
-  { name: "Eve", age: 38 },
+	{ name: "Alice", age: 15 },
+	{ name: "Bob", age: 23 },
+	{ name: "Eve", age: 38 },
 ];
 
 type p14 = typeof MyArray[number];
 
 const newArr: p14 = {
-  name: "",
-  age: 2,
+	name: "",
+	age: 2,
 };
 
 const key = "age";
@@ -104,8 +104,8 @@ type p16<T extends { message: unknown }> = T["message"];
 type p19<T> = T extends { message: unknown } ? T["message"] : never;
 
 type p17 = {
-  message: string;
-  age: number;
+	message: string;
+	age: number;
 };
 
 type p18 = p16<p17>;

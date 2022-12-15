@@ -4,16 +4,16 @@
 
 import { ReduxAction } from "../store/action/action";
 export function createReducer(
-  initialState: any,
-  handlers: {
-    [type: string]: (state: any, action: any) => any;
-  }
+	initialState: any,
+	handlers: {
+		[type: string]: (state: any, action: any) => any;
+	},
 ) {
-  return function reducer(state = initialState, action: ReduxAction<any>) {
-    if (handlers.hasOwnProperty(action.type)) {
-      return handlers[action.type](state, action);
-    } else {
-      return state;
-    }
-  };
+	return function reducer(state = initialState, action: ReduxAction<any>) {
+		if (handlers.hasOwnProperty(action.type)) {
+			return handlers[action.type](state, action);
+		} else {
+			return state;
+		}
+	};
 }

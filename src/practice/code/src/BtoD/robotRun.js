@@ -15,51 +15,51 @@
  */
 //range 区间 start 开始位置 rest 剩余的步数 aim 要去的位置
 function process(start, rest, aim, range) {
-  if (rest === 0) {
-    return start === aim ? 1 : 0;
-  }
-  if (start === 1) {
-    return process(2, rest - 1, aim, range);
-  }
-  if (start === range) {
-    return process(range - 1, rest - 1, aim, range);
-  }
-  let res1 = process(start + 1, rest - 1, aim, range);
-  let res2 = process(start - 1, rest - 1, aim, range);
-  return res1 + res2;
+	if (rest === 0) {
+		return start === aim ? 1 : 0;
+	}
+	if (start === 1) {
+		return process(2, rest - 1, aim, range);
+	}
+	if (start === range) {
+		return process(range - 1, rest - 1, aim, range);
+	}
+	let res1 = process(start + 1, rest - 1, aim, range);
+	let res2 = process(start - 1, rest - 1, aim, range);
+	return res1 + res2;
 }
 //主函数
 function main(N, M, K, P) {
-  return process(M, K, P, N);
+	return process(M, K, P, N);
 }
 //缓存函数
 function processCache(start, rest, aim, range, dp) {
-  //之前已经算过了
-  if (dp[start][rest] !== -1) {
-    return dp[start][rest];
-  }
-  //之前还没算过 填表
-  let ans = 0;
-  if (rest === 0) {
-    ans = start === aim ? 1 : 0;
-  } else if (start === 1) {
-    ans = processCache(2, rest - 1, aim, range, dp);
-  } else if (start === range) {
-    ans = processCache(range - 1, rest - 1, aim, range, dp);
-  } else {
-    ans =
-      processCache(start + 1, rest - 1, aim, range, dp) +
-      processCache(start - 1, rest - 1, aim, range, dp);
-  }
-  dp[start][rest] = ans;
-  return ans;
+	//之前已经算过了
+	if (dp[start][rest] !== -1) {
+		return dp[start][rest];
+	}
+	//之前还没算过 填表
+	let ans = 0;
+	if (rest === 0) {
+		ans = start === aim ? 1 : 0;
+	} else if (start === 1) {
+		ans = processCache(2, rest - 1, aim, range, dp);
+	} else if (start === range) {
+		ans = processCache(range - 1, rest - 1, aim, range, dp);
+	} else {
+		ans =
+			processCache(start + 1, rest - 1, aim, range, dp) +
+			processCache(start - 1, rest - 1, aim, range, dp);
+	}
+	dp[start][rest] = ans;
+	return ans;
 }
 function main1(N, M, K, P) {
-  let dp = Array(N);
-  for (let i = 0; i <= K; i++) {
-    dp[i] = Array(K + 1).fill(-1);
-  }
-  return processCache(M, K, P, N, dp);
+	let dp = Array(N);
+	for (let i = 0; i <= K; i++) {
+		dp[i] = Array(K + 1).fill(-1);
+	}
+	return processCache(M, K, P, N, dp);
 }
 console.log(main(4, 2, 4, 4));
 console.log(main1(4, 2, 4, 4));

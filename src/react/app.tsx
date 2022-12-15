@@ -9,13 +9,13 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store/store";
 
 function App() {
-  return (
-    <Provider store={store}>
-      this is app component
-      <Combine />
-      <Protal />
-    </Provider>
-  );
+	return (
+		<Provider store={store}>
+			this is app component
+			<Combine />
+			<Protal />
+		</Provider>
+	);
 }
 
 export default App;

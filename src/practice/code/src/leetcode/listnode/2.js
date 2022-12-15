@@ -16,78 +16,78 @@
  */
 //hack的做法 以为他是传进来一个数组 没想到是没有数组的方法的
 var addTwoNumbersHack = function (l1, l2) {
-  const str1 = Number(l1.reverse().join(""));
-  const str2 = Number(l2.reverse().join(""));
-  return (str1 + str2)
-    .toString()
-    .split("")
-    .map((num, index, arr) => {
-      return (arr[index] = Number(num));
-    });
+	const str1 = Number(l1.reverse().join(""));
+	const str2 = Number(l2.reverse().join(""));
+	return (str1 + str2)
+		.toString()
+		.split("")
+		.map((num, index, arr) => {
+			return (arr[index] = Number(num));
+		});
 };
 console.log(addTwoNumbersHack([1, 2, 3], [1, 2, 3]));
 var addTwoNumbers = function (l1, l2) {
-  const preHead = new ListNode();
-  let cur = preHead;
-  let carry = 0;
-  while (l1 || l2) {
-    const r1 = l1 ? l1.val : 0;
-    const r2 = l2 ? l2.val : 0;
-    const sum = r1 + r2 + carry;
-    cur.next = new ListNode(sum % 10);
-    cur = cur.next;
-    carry = Math.floor(sum / 10);
-    if (l1) {
-      l1 = l1.next;
-    }
-    if (l2) {
-      l2 = l2.next;
-    }
-  }
-  if (carry > 0) {
-    cur.next = new ListNode(carry);
-  }
-  return preHead.next;
+	const preHead = new ListNode();
+	let cur = preHead;
+	let carry = 0;
+	while (l1 || l2) {
+		const r1 = l1 ? l1.val : 0;
+		const r2 = l2 ? l2.val : 0;
+		const sum = r1 + r2 + carry;
+		cur.next = new ListNode(sum % 10);
+		cur = cur.next;
+		carry = Math.floor(sum / 10);
+		if (l1) {
+			l1 = l1.next;
+		}
+		if (l2) {
+			l2 = l2.next;
+		}
+	}
+	if (carry > 0) {
+		cur.next = new ListNode(carry);
+	}
+	return preHead.next;
 };
 //递归 注意运算符号的顺序 不如存在变量里面 或者给他包起来
 //确定递归的出口 l1 l2 都是空的 这时候最后一位可能存在进位 所以等待最后一位的进位是0的时候 就是递归的出口
 function dfs(num1, num2, carry) {
-  if (!num1 && !num2 && carry === 0) {
-    return null;
-  }
-  const r1 = num1 ? num1.val : 0;
-  const r2 = num2 ? num2.val : 0;
-  let newCarry = Math.floor((r1 + r2 + carry) / 10);
-  let head = new ListNode((r1 + r2 + carry) % 10);
-  head.next = dfs(num1 ? num1.next : null, num2 ? num2.next : null, newCarry);
-  return head;
+	if (!num1 && !num2 && carry === 0) {
+		return null;
+	}
+	const r1 = num1 ? num1.val : 0;
+	const r2 = num2 ? num2.val : 0;
+	let newCarry = Math.floor((r1 + r2 + carry) / 10);
+	let head = new ListNode((r1 + r2 + carry) % 10);
+	head.next = dfs(num1 ? num1.next : null, num2 ? num2.next : null, newCarry);
+	return head;
 }
 let addTwoNumbersRetry = function (l1, l2) {
-  let pre = new ListNode(0);
-  //新建一个节点 不能修改原来的 next一直往下指 那你最后可能只是一个空值或者是null
-  let node = pre;
-  let carry = 0;
-  while (l1 !== null || l2 !== null) {
-    let num1 = l1 === null ? 0 : l1.val;
-    let num2 = l2 === null ? 0 : l2.val;
-    let sum = num1 + num2 + carry;
-    let num = sum % 10;
+	let pre = new ListNode(0);
+	//新建一个节点 不能修改原来的 next一直往下指 那你最后可能只是一个空值或者是null
+	let node = pre;
+	let carry = 0;
+	while (l1 !== null || l2 !== null) {
+		let num1 = l1 === null ? 0 : l1.val;
+		let num2 = l2 === null ? 0 : l2.val;
+		let sum = num1 + num2 + carry;
+		let num = sum % 10;
 
-    carry = Math.floor(sum / 10);
-    node.next = new ListNode(num);
+		carry = Math.floor(sum / 10);
+		node.next = new ListNode(num);
 
-    node = node.next;
-    if (l1 !== null) {
-      l1 = l1.next;
-    }
-    if (l2 !== null) {
-      l2 = l2.next;
-    }
-  }
+		node = node.next;
+		if (l1 !== null) {
+			l1 = l1.next;
+		}
+		if (l2 !== null) {
+			l2 = l2.next;
+		}
+	}
 
-  if (carry === 1) {
-    node.next = new ListNode(1);
-    node = node.next;
-  }
-  return pre.next;
+	if (carry === 1) {
+		node.next = new ListNode(1);
+		node = node.next;
+	}
+	return pre.next;
 };

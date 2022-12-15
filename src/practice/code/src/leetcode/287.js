@@ -9,16 +9,16 @@
  * @return {number}
  */
 let findDuplicate = function (nums) {
-  for (let i = 0; i < nums.length; i++) {
-    if (nums[i] === i + 1) {
-      continue;
-    }
-    if (nums[i] === nums[nums[i] - 1]) {
-      return nums[i];
-    }
-    //这个顺序不能乱 否则出错
-    [nums[nums[i] - 1], nums[i]] = [nums[i], nums[nums[i] - 1]];
-    // [nums[i], nums[nums[i] - 1]] = [nums[nums[i] - 1], nums[i]];
-  }
+	for (let i = 0; i < nums.length; i++) {
+		if (nums[i] === i + 1) {
+			continue;
+		}
+		if (nums[i] === nums[nums[i] - 1]) {
+			return nums[i];
+		}
+		//这个顺序不能乱 否则出错
+		[nums[nums[i] - 1], nums[i]] = [nums[i], nums[nums[i] - 1]];
+		// [nums[i], nums[nums[i] - 1]] = [nums[nums[i] - 1], nums[i]];
+	}
 };
 export { findDuplicate };

@@ -14,36 +14,36 @@
  */
 
 function debounce(fn, timer, now) {
-  let t = null;
-  return function () {
-    if (t) {
-      clearTimeout(t);
-    }
-    if (now) {
-      let first = !t;
-      if (first) {
-        fn.apply(this.arguments);
-      }
-      t = setTimeout(() => {
-        t = null;
-      });
-    } else {
-      t = setTimeout(() => {
-        fn.apply(this, arguments);
-      }, timer);
-    }
-  };
+	let t = null;
+	return function () {
+		if (t) {
+			clearTimeout(t);
+		}
+		if (now) {
+			let first = !t;
+			if (first) {
+				fn.apply(this.arguments);
+			}
+			t = setTimeout(() => {
+				t = null;
+			});
+		} else {
+			t = setTimeout(() => {
+				fn.apply(this, arguments);
+			}, timer);
+		}
+	};
 }
 
 function throttle(fn, timer) {
-  let begin = 0;
-  return function () {
-    let now = new Date().getTime();
-    if (now - begin > timer) {
-      fn.apply(this, arguments);
-      begin = now;
-    }
-  };
+	let begin = 0;
+	return function () {
+		let now = new Date().getTime();
+		if (now - begin > timer) {
+			fn.apply(this, arguments);
+			begin = now;
+		}
+	};
 }
 /***
  * this 是在运行时基于函数的执行环境绑定的 在全局就window
@@ -52,42 +52,42 @@ function throttle(fn, timer) {
  * 箭头函数不能作为构造函数 不能new
  */
 function newInstance(left, right) {
-  right = right.prototype;
-  let leftproto = left.__proto__;
-  while (true) {
-    if (leftproto === right) {
-      return true;
-    }
-    if (leftproto === null) {
-      return false;
-    }
-    leftproto = leftproto.__proto__;
-  }
+	right = right.prototype;
+	let leftproto = left.__proto__;
+	while (true) {
+		if (leftproto === right) {
+			return true;
+		}
+		if (leftproto === null) {
+			return false;
+		}
+		leftproto = leftproto.__proto__;
+	}
 }
 function whichType(obj) {
-  if (obj == null) {
-    return obj + "";
-  }
-  return typeof obj === "function" || "object"
-    ? Object.prototype.toString.call(obj)
-    : typeof obj;
+	if (obj == null) {
+		return obj + "";
+	}
+	return typeof obj === "function" || "object"
+		? Object.prototype.toString.call(obj)
+		: typeof obj;
 }
 Function.prototype.mycall = function (context, ...args) {
-  context = context || window;
-  context.fn = this;
-  let res = context.fn(...args);
-  delete context.fn;
-  return res;
+	context = context || window;
+	context.fn = this;
+	let res = context.fn(...args);
+	delete context.fn;
+	return res;
 };
 for (let i = 0; i < 5; i++) {
-  (function (i) {
-    setTimeout(() => {
-      console.log(i);
-    });
-  })(i);
+	(function (i) {
+		setTimeout(() => {
+			console.log(i);
+		});
+	})(i);
 }
 function mynew(fn, ...rest) {
-  let obj = Object.create(fn.prototype);
-  fn.call(obj, ...rest);
-  return obj;
+	let obj = Object.create(fn.prototype);
+	fn.call(obj, ...rest);
+	return obj;
 }

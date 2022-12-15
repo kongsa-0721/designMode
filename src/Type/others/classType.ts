@@ -3,11 +3,11 @@
  */
 
 export class cl1 {
-  name: string;
-  constructor(props: ty4) {
-    console.log(props);
-    this.name = props.name;
-  }
+	name: string;
+	constructor(props: ty4) {
+		console.log(props);
+		this.name = props.name;
+	}
 }
 // private protected 的属性不能被获取到
 type ty4 = cl1;

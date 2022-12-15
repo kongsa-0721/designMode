@@ -2,8 +2,8 @@
  * Created by KongSa on 2022/4/14-8:37 PM.
  */
 interface if1 {
-  name: string;
-  age: number;
+	name: string;
+	age: number;
 }
 //Initial type:"name" | "age"
 type ty1 = keyof if1;
@@ -12,8 +12,8 @@ const a: ty1 = "name";
 const b: ty1 = "age";
 
 const ob1 = {
-  name: "kongsa",
-  age: 21,
+	name: "kongsa",
+	age: 21,
 };
 //Initial type:{name: string, age: number}
 type ty2 = typeof ob1;
@@ -27,14 +27,14 @@ const d: ty3 = "age";
  * 根据对象的key来提取val
  */
 export function getObjVal(str: string) {
-  //此时 形参a被断言为 "name"|"key"
-  return ob1[str as ty3];
+	//此时 形参a被断言为 "name"|"key"
+	return ob1[str as ty3];
 }
 
 // --------------------根据索引访问-------------------
 interface if2 {
-  pet: string;
-  color: number;
+	pet: string;
+	color: number;
 }
 type ty4 = keyof if2;
 //Initial type: number | string   ty5 的类型就是 pet|color 联合起来
@@ -43,35 +43,35 @@ type ty5 = if2[ty4];
 // --------------------接口继承 extend-------------------
 
 interface if3 {
-  car: string;
+	car: string;
 }
 
 interface if4 {
-  payload: number;
+	payload: number;
 }
 
 interface if5 extends if3, if4 {
-  owner: string;
+	owner: string;
 }
 //human 有 if 3 4 5 所有的属性
 const human: if5 = {
-  car: "didi",
-  payload: 100,
-  owner: "kongsa",
+	car: "didi",
+	payload: 100,
+	owner: "kongsa",
 };
 
 // --------------------type继承 & 交叉类型-------------------
 
 type ty6 = {
-  car: string;
+	car: string;
 };
 type ty7 = {
-  payload: number;
+	payload: number;
 };
 
 const human1: ty7 & ty6 = {
-  car: "didi",
-  payload: 100,
+	car: "didi",
+	payload: 100,
 };
 
 // --------------------type运算符-------------------
@@ -96,10 +96,10 @@ type ty11 = P1<"x" | "y">;
 
 //never 类型
 const errFn = (err: string): never => {
-  throw new Error(err);
+	throw new Error(err);
 };
 const errWhile = (): never => {
-  while (true) {}
+	while (true) {}
 };
 //定义一个obj 如果属性名是数字 则会被转化为字符串 所以报错 不能重复定义
 // const objj = {

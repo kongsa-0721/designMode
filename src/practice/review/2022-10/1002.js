@@ -5,7 +5,7 @@
 const map = new Map();
 map.set("name", "kongsa");
 map.forEach((e, i, origin) => {
-  console.log(e, i, origin);
+	console.log(e, i, origin);
 });
 //entries对象 返回的是一个数组 里面的每一项还是数组 key val
 //fromEntries 把键值对列表转化为对象 可以转化map 或者键值对数组
@@ -14,7 +14,7 @@ console.log(Object.entries(Object.fromEntries(map)));
 const arr = [1, 1, 1, 1];
 const ppx = arr.entries(); //返回值是一个可迭代的对象 每一个都是一个数组
 for (let item of ppx) {
-  console.log(item);
+	console.log(item);
 }
 
 // set = Array.prototype.slice.call(set);

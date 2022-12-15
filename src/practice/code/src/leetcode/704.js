@@ -9,19 +9,19 @@
  * @return {number}
  */
 let search = function (nums, target) {
-  let slow = 0,
-    fast = nums.length - 1;
-  while (slow <= fast) {
-    let mid = (slow + fast) >> 1;
-    if (nums[mid] === target) {
-      return mid;
-    }
-    if (nums[mid] < target) {
-      slow = mid + 1;
-    }
-    if (nums[mid] > target) {
-      fast = mid - 1;
-    }
-  }
-  return -1;
+	let slow = 0,
+		fast = nums.length - 1;
+	while (slow <= fast) {
+		let mid = (slow + fast) >> 1;
+		if (nums[mid] === target) {
+			return mid;
+		}
+		if (nums[mid] < target) {
+			slow = mid + 1;
+		}
+		if (nums[mid] > target) {
+			fast = mid - 1;
+		}
+	}
+	return -1;
 };

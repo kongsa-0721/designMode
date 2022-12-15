@@ -2,32 +2,32 @@
  * Created by KongSa on 2022/9/20-2:27 PM.
  */
 const delay = (ms) => {
-  return function (...args) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        ms > 2000 ? resolve(args) : reject("this is error");
-      }, ms);
-    });
-  };
+	return function (...args) {
+		return new Promise((resolve, reject) => {
+			setTimeout(() => {
+				ms > 2000 ? resolve(args) : reject("this is error");
+			}, ms);
+		});
+	};
 };
 // 如果小于ms时间 数据返回回来 就不会展示loading 否则 展示loading 但是不影响数据 数据的时间还是之前的
 const load = (success, ms) => {
-  return function (...args) {
-    const request = success(...args);
-    return Promise.race([request, delay(ms)()]).then(
-      (res) => {
-        console.log(res);
-      },
-      (err) => {
-        console.log(err);
-        return request;
-      }
-    );
-  };
+	return function (...args) {
+		const request = success(...args);
+		return Promise.race([request, delay(ms)()]).then(
+			(res) => {
+				console.log(res);
+			},
+			(err) => {
+				console.log(err);
+				return request;
+			},
+		);
+	};
 };
 async function app() {
-  const res = await load(delay(2001), 1000)(1, 1, 1, 1);
-  console.log(res);
+	const res = await load(delay(2001), 1000)(1, 1, 1, 1);
+	console.log(res);
 }
 app();
 /**
@@ -48,10 +48,10 @@ app();
  *
  */
 class Person {
-  constructor() {}
-  get() {
-    return "this is a person example";
-  }
+	constructor() {}
+	get() {
+		return "this is a person example";
+	}
 }
 let p1 = new Person();
 console.log(typeof Person);

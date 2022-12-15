@@ -5,8 +5,8 @@ import { isValid } from "../../src/leetcode/20.js";
 import * as assert from "assert";
 
 describe("20 有效的括号", () => {
-  it("括号边界", () => {
-    let res = false;
-    assert.equal(res, isValid("(])"));
-  });
+	it("括号边界", () => {
+		let res = false;
+		assert.equal(res, isValid("(])"));
+	});
 });

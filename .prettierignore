@@ -1,0 +1,11 @@
+**/.git
+**/.svn
+**/.hg
+**/node_modules
+**/dist
+build
+coverage
+dist 
+.idea
+assets
+**/assets

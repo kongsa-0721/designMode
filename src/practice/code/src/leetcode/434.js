@@ -9,17 +9,17 @@
  * bad case "" , "      "
  */
 let countSegments = function (s) {
-  //第一件事就是判断是否存在 是否空
-  if (s.length === 0 || !s) {
-    return 0;
-  }
-  let count = 0;
-  s = s + " ";
-  for (let i = 0; i < s.length; i++) {
-    //注意边界条件
-    if (s[i] === " " && s[i - 1] !== " " && i > 0) {
-      count++;
-    }
-  }
-  return count;
+	//第一件事就是判断是否存在 是否空
+	if (s.length === 0 || !s) {
+		return 0;
+	}
+	let count = 0;
+	s = s + " ";
+	for (let i = 0; i < s.length; i++) {
+		//注意边界条件
+		if (s[i] === " " && s[i - 1] !== " " && i > 0) {
+			count++;
+		}
+	}
+	return count;
 };

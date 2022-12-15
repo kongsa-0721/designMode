@@ -104,7 +104,7 @@ const timeout = (i) => {
 	return new Promise((resolve) =>
 		setTimeout(() => {
 			resolve(i);
-		}, i)
+		}, i),
 	).then((i) => {
 		console.log(i, "结束");
 		return i;
@@ -135,5 +135,3 @@ function retry(fn, delay, times) {
 		func();
 	});
 }
-
-

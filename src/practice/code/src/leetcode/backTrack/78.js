@@ -9,16 +9,16 @@
  * @return {number[][]}
  */
 let subsets = function (nums) {
-  let res = [];
-  function backTrack(index, arr) {
-    res.push(arr.slice());
-    for (let i = index; i < nums.length; i++) {
-      arr.push(nums[i]);
-      //注意这里是i+1 而不是index index就会全部遍历一遍
-      backTrack(i + 1, arr);
-      arr.pop();
-    }
-  }
-  backTrack(0, []);
-  return res;
+	let res = [];
+	function backTrack(index, arr) {
+		res.push(arr.slice());
+		for (let i = index; i < nums.length; i++) {
+			arr.push(nums[i]);
+			//注意这里是i+1 而不是index index就会全部遍历一遍
+			backTrack(i + 1, arr);
+			arr.pop();
+		}
+	}
+	backTrack(0, []);
+	return res;
 };

@@ -8,18 +8,18 @@
  * @param target
  */
 function decorator1(target: any) {
-  console.log(target);
-  class Dog {
-    say() {
-      console.log("this is dog class");
-    }
-  }
-  return Dog;
+	console.log(target);
+	class Dog {
+		say() {
+			console.log("this is dog class");
+		}
+	}
+	return Dog;
 }
 @decorator1
 class Person {
-  say() {
-    console.log("this is person class");
-  }
+	say() {
+		console.log("this is person class");
+	}
 }
 export { Person };

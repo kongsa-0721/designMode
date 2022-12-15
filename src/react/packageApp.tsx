@@ -7,19 +7,19 @@ import { booleanComp } from "./class/class";
 import { CommonEffect, CommonLayoutEffect } from "./basic/effect";
 
 function App() {
-  const b = new booleanComp("name");
-  const InputOnChange = (e: any) => {
-    b.dispatchAction(e.target.value);
-  };
-  return (
-    <>
-      <CommonEffect />
-      <CommonLayoutEffect />
-      {/*{b.value}*/}
-      {/*<Child />*/}
-      {/*<input type="text" value={b.value} onChange={InputOnChange} />*/}
-    </>
-  );
+	const b = new booleanComp("name");
+	const InputOnChange = (e: any) => {
+		b.dispatchAction(e.target.value);
+	};
+	return (
+		<>
+			<CommonEffect />
+			<CommonLayoutEffect />
+			{/*{b.value}*/}
+			{/*<Child />*/}
+			{/*<input type="text" value={b.value} onChange={InputOnChange} />*/}
+		</>
+	);
 }
 
 export default App;

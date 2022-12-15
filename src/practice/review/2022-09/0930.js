@@ -15,108 +15,108 @@
  */
 
 function myNew(fn, ...rest) {
-  let obj = Object.create(Object.getPrototypeOf(fn));
-  const res = fn.call(obj, ...rest);
-  return typeof res === "object" || "function" ? res : ob;
+	let obj = Object.create(Object.getPrototypeOf(fn));
+	const res = fn.call(obj, ...rest);
+	return typeof res === "object" || "function" ? res : ob;
 }
 Function.prototype.myCall = function (context, ...rest) {
-  context = Object(context || window);
-  const key = Symbol();
-  context[key] = this;
-  const res = context[key](...rest);
-  delete context[key];
-  return res;
+	context = Object(context || window);
+	const key = Symbol();
+	context[key] = this;
+	const res = context[key](...rest);
+	delete context[key];
+	return res;
 };
 function debounce(fn, time, now) {
-  let t = null;
-  return function () {
-    if (t) {
-      clearTimeout(t);
-    }
-    if (now) {
-      let first = !t;
-      if (first) {
-        fn.apply(this, arguments);
-      }
-      t = setTimeout(() => {
-        t = null;
-      }, time);
-    } else {
-      t = setTimeout(() => {
-        fn.apply(this, arguments);
-      }, time);
-    }
-  };
+	let t = null;
+	return function () {
+		if (t) {
+			clearTimeout(t);
+		}
+		if (now) {
+			let first = !t;
+			if (first) {
+				fn.apply(this, arguments);
+			}
+			t = setTimeout(() => {
+				t = null;
+			}, time);
+		} else {
+			t = setTimeout(() => {
+				fn.apply(this, arguments);
+			}, time);
+		}
+	};
 }
 function throttle(fn, time) {
-  let begin = 0;
-  return function () {
-    let now = new Date().getTime();
-    if (now - begin > time) {
-      fn.apply(this, arguments);
-      begin = now;
-    }
-  };
+	let begin = 0;
+	return function () {
+		let now = new Date().getTime();
+		if (now - begin > time) {
+			fn.apply(this, arguments);
+			begin = now;
+		}
+	};
 }
 //禁止被new
 function not() {
-  if (this instanceof not) {
-    throw new Error("not is not allow to new");
-  }
-  return function a() {
-    console.log("this is a function");
-  };
+	if (this instanceof not) {
+		throw new Error("not is not allow to new");
+	}
+	return function a() {
+		console.log("this is a function");
+	};
 }
 not();
 // let a = new not();
 // instanceof
 function instance(left, right) {
-  if (typeof left !== "object" || !left) {
-    return false;
-  }
-  if (!right.prototype) {
-    throw new Error(right + "has no prototype");
-  }
-  if (Object.getPrototypeOf(left) === right.prototype) {
-    return true;
-  } else {
-    return instance(Object.getPrototypeOf(left), right);
-  }
+	if (typeof left !== "object" || !left) {
+		return false;
+	}
+	if (!right.prototype) {
+		throw new Error(right + "has no prototype");
+	}
+	if (Object.getPrototypeOf(left) === right.prototype) {
+		return true;
+	} else {
+		return instance(Object.getPrototypeOf(left), right);
+	}
 }
 
 let a = [1, 1];
 // console.log(instance(a, Object.prototype));
 //检测数据类型
 function getType(target) {
-  if (target == null) {
-    return target + "";
-  }
-  return typeof target !== "object" || "function"
-    ? Object.prototype.toString.call(target)
-    : typeof target;
+	if (target == null) {
+		return target + "";
+	}
+	return typeof target !== "object" || "function"
+		? Object.prototype.toString.call(target)
+		: typeof target;
 }
 //深拷贝
 function deepCopy(origin) {
-  let target = Object.create(Object.getPrototypeOf(origin));
-  let stack = [{ target, origin }];
-  let map = new Map();
-  while (stack.length) {
-    const { origin, target } = stack.pop();
-    for (let item of Object.getOwnPropertyNames(origin)) {
-      if (typeof item === "object" && origin !== null) {
-        if (map.has(origin[item])) {
-          target[item] = map.get(origin[item]);
-        } else {
-          target[item] = Object.create(Object.getPrototypeOf(origin[item]));
-          map.set(origin[item], target[item]);
-          stack.push({ origin: origin[item], target: target[item] });
-        }
-      } else {
-        target[item] = origin[item];
-      }
-    }
-  }
-  return target;
+	let target = Object.create(Object.getPrototypeOf(origin));
+	let stack = [{ target, origin }];
+	let map = new Map();
+	while (stack.length) {
+		const { origin, target } = stack.pop();
+		for (let item of Object.getOwnPropertyNames(origin)) {
+			if (typeof item === "object" && origin !== null) {
+				if (map.has(origin[item])) {
+					target[item] = map.get(origin[item]);
+				} else {
+					target[item] = Object.create(Object.getPrototypeOf(origin[item]));
+					map.set(origin[item], target[item]);
+					stack.push({ origin: origin[item], target: target[item] });
+				}
+			} else {
+				target[item] = origin[item];
+			}
+		}
+	}
+	return target;
 }
 let obj = { a: 2, b: 3 };
 
@@ -126,169 +126,169 @@ console.log(obj, obj1);
 console.log(Object.getOwnPropertyNames(obj));
 
 Function.prototype.myBind = function (context, ...args) {
-  context = Object(context || window);
-  const key = Symbol();
-  const fn = this;
-  function result(...brgs) {
-    if (this instanceof fn) {
-      this[key] = fn;
-      this[key](...args, ...brgs);
-      delete this[key];
-    } else {
-      context[key] = fn;
-      context[key](...args, ...brgs);
-      delete context[key];
-    }
-  }
-  result.prototype = Object.create(fn.prototype);
-  return result;
+	context = Object(context || window);
+	const key = Symbol();
+	const fn = this;
+	function result(...brgs) {
+		if (this instanceof fn) {
+			this[key] = fn;
+			this[key](...args, ...brgs);
+			delete this[key];
+		} else {
+			context[key] = fn;
+			context[key](...args, ...brgs);
+			delete context[key];
+		}
+	}
+	result.prototype = Object.create(fn.prototype);
+	return result;
 };
 function ppx(a) {
-  console.log(this);
-  console.log(arguments);
+	console.log(this);
+	console.log(arguments);
 }
 const fn1 = ppx.myBind(obj, 11);
 const o1 = new fn1("aaa");
 console.log(o1);
 //compose
 function compose(...func) {
-  if (func.length == 0) {
-    return (arg) => arg;
-  }
-  if (func.length === 1) {
-    return func[0];
-  }
-  return func.reduce((a, b) => {
-    return function (...args) {
-      a(b(...args));
-    };
-  });
+	if (func.length == 0) {
+		return (arg) => arg;
+	}
+	if (func.length === 1) {
+		return func[0];
+	}
+	return func.reduce((a, b) => {
+		return function (...args) {
+			a(b(...args));
+		};
+	});
 }
 
 //柯里化
 function curry(func) {
-  return function curried(...args) {
-    if (args.length === func.length) {
-      return func.apply(this, args);
-    } else {
-      return function (...brgs) {
-        curried.apply(this, args.concat(brgs));
-      };
-    }
-  };
+	return function curried(...args) {
+		if (args.length === func.length) {
+			return func.apply(this, args);
+		} else {
+			return function (...brgs) {
+				curried.apply(this, args.concat(brgs));
+			};
+		}
+	};
 }
 /**
  * 实现一个promise
  */
 class Commit {
-  static PENDING = "is_pending";
-  static FULLFILLED = "is_fullfilled";
-  static REJECT = "is_reject";
+	static PENDING = "is_pending";
+	static FULLFILLED = "is_fullfilled";
+	static REJECT = "is_reject";
 
-  constructor(fn) {
-    this.result = null;
-    this.status = Commit.PENDING;
-    this.fullStack = [];
-    this.failStack = [];
-    try {
-      fn(this.resolve.bind(this), this.reject.bind(this));
-    } catch (e) {
-      this.reject(e);
-    }
-  }
-  resolve(res) {
-    setTimeout(() => {
-      if (this.status === Commit.PENDING) {
-        this.status = Commit.FULLFILLED;
-        this.result = res;
-        this.fullStack.forEach((e) => e(this.result));
-      }
-    });
-  }
-  reject(res) {
-    setTimeout(() => {
-      if (this.status === Commit.PENDING) {
-        this.status = Commit.REJECT;
-        this.result = res;
-        this.failStack.forEach((e) => e(this.result));
-      }
-    });
-  }
-  then(onRes, onRej) {
-    return new Commit((res, rej) => {
-      if (this.status === Commit.PENDING) {
-        this.fullStack.push(onRes);
-        this.failStack.push(onRej);
-      }
-      if (this.status === Commit.FULLFILLED) {
-        onRes(this.result);
-      }
-      if (this.status === Commit.REJECT) {
-        onRej(this.result);
-      }
-    });
-  }
-  static all(iterator) {
-    return new Promise((res, rej) => {
-      let result = [];
-      let count = 0;
-      for (let item of iterator) {
-        Promise.resolve(item)
-          .then((e) => {
-            result.push(e);
-            if (++count === iterator.length) {
-              res(result);
-            }
-          })
-          .catch((e) => rej(e));
-      }
-    });
-  }
-  static race(iterator) {
-    return new Promise((res, rej) => {
-      for (let item of iterator) {
-        Promise.resolve(item)
-          .then((e) => res(e))
-          .catch((e) => rej(e));
-      }
-    });
-  }
+	constructor(fn) {
+		this.result = null;
+		this.status = Commit.PENDING;
+		this.fullStack = [];
+		this.failStack = [];
+		try {
+			fn(this.resolve.bind(this), this.reject.bind(this));
+		} catch (e) {
+			this.reject(e);
+		}
+	}
+	resolve(res) {
+		setTimeout(() => {
+			if (this.status === Commit.PENDING) {
+				this.status = Commit.FULLFILLED;
+				this.result = res;
+				this.fullStack.forEach((e) => e(this.result));
+			}
+		});
+	}
+	reject(res) {
+		setTimeout(() => {
+			if (this.status === Commit.PENDING) {
+				this.status = Commit.REJECT;
+				this.result = res;
+				this.failStack.forEach((e) => e(this.result));
+			}
+		});
+	}
+	then(onRes, onRej) {
+		return new Commit((res, rej) => {
+			if (this.status === Commit.PENDING) {
+				this.fullStack.push(onRes);
+				this.failStack.push(onRej);
+			}
+			if (this.status === Commit.FULLFILLED) {
+				onRes(this.result);
+			}
+			if (this.status === Commit.REJECT) {
+				onRej(this.result);
+			}
+		});
+	}
+	static all(iterator) {
+		return new Promise((res, rej) => {
+			let result = [];
+			let count = 0;
+			for (let item of iterator) {
+				Promise.resolve(item)
+					.then((e) => {
+						result.push(e);
+						if (++count === iterator.length) {
+							res(result);
+						}
+					})
+					.catch((e) => rej(e));
+			}
+		});
+	}
+	static race(iterator) {
+		return new Promise((res, rej) => {
+			for (let item of iterator) {
+				Promise.resolve(item)
+					.then((e) => res(e))
+					.catch((e) => rej(e));
+			}
+		});
+	}
 }
 //异步并发
 
 async function pool(arr, fn, max) {
-  let ret = [];
-  let excuting = [];
-  for (let item of arr) {
-    const pItem = Promise.resolve().then(() => fn(item));
-    ret.push(pItem);
-    const e = pItem.then(() => {
-      excuting.splice(excuting.indexOf(e), 1);
-    });
-    excuting.push(e);
-    if (excuting.length >= max) {
-      await Promise.race(excuting);
-    }
-  }
-  return Promise.all(ret);
+	let ret = [];
+	let excuting = [];
+	for (let item of arr) {
+		const pItem = Promise.resolve().then(() => fn(item));
+		ret.push(pItem);
+		const e = pItem.then(() => {
+			excuting.splice(excuting.indexOf(e), 1);
+		});
+		excuting.push(e);
+		if (excuting.length >= max) {
+			await Promise.race(excuting);
+		}
+	}
+	return Promise.all(ret);
 }
 
 function retry(fn, delay, times) {
-  return new Promise((res, rej) => {
-    function func() {
-      Promise.resolve(fn())
-        .then((e) => res(e))
-        .catch((e) => {
-          if (times === 0) {
-            rej(e);
-          } else {
-            times--;
-            setTimeout(() => {
-              func();
-            }, delay);
-          }
-        });
-    }
-    func();
-  });
+	return new Promise((res, rej) => {
+		function func() {
+			Promise.resolve(fn())
+				.then((e) => res(e))
+				.catch((e) => {
+					if (times === 0) {
+						rej(e);
+					} else {
+						times--;
+						setTimeout(() => {
+							func();
+						}, delay);
+					}
+				});
+		}
+		func();
+	});
 }

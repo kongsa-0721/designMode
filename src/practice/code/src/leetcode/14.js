@@ -8,21 +8,21 @@
  * @return {string}
  */
 let longestCommonPrefix = function (strs) {
-  if (!strs || strs.length === 0) {
-    return "";
-  }
-  let res = strs.reduce((x, y) => {
-    let temp = "";
-    let len1 = x.length;
-    let len2 = y.length;
-    for (let i = 0, j = 0; i < len1 && j < len2; i++, j++) {
-      if (x[i] === y[i]) {
-        temp += x[i];
-      } else {
-        break;
-      }
-    }
-    return temp;
-  });
-  return res;
+	if (!strs || strs.length === 0) {
+		return "";
+	}
+	let res = strs.reduce((x, y) => {
+		let temp = "";
+		let len1 = x.length;
+		let len2 = y.length;
+		for (let i = 0, j = 0; i < len1 && j < len2; i++, j++) {
+			if (x[i] === y[i]) {
+				temp += x[i];
+			} else {
+				break;
+			}
+		}
+		return temp;
+	});
+	return res;
 };

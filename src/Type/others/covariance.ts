@@ -2,17 +2,17 @@
  * Created by KongSa on 2022/4/14-9:38 PM.
  */
 interface animal {
-  name: string;
+	name: string;
 }
 
 interface dogtype extends animal {
-  say: () => void;
+	say: () => void;
 }
 
 let cat: animal;
-let dog: dogtype = {
-  name: "dog",
-  say: () => {},
+const dog: dogtype = {
+	name: "dog",
+	say: () => {},
 };
 // ---------------- 协变 --------------------
 //dog可以赋值给cat 但是cat上没有say属性  反过来不行
@@ -22,7 +22,7 @@ cat = dog;
 type AnimalFn = (arg: animal) => void;
 type DogFn = (arg: dogtype) => void;
 
-let Eg1: AnimalFn = ({}) => {};
+const Eg1: AnimalFn = ({}) => {};
 let Eg2: DogFn;
 // 不再可以赋值了，
 // AnimalFn = DogFn不可以赋值了, Animal = Dog是可以的
@@ -38,15 +38,15 @@ Eg2 = Eg1;
  * 依然是不理解的
  */
 let visitDog = function (arg: dogtype): animal {
-  return {
-    name: arg.name,
-  };
+	return {
+		name: arg.name,
+	};
 };
-let visitAnimal = function (arg: animal): dogtype {
-  return {
-    name: arg.name,
-    say: () => {},
-  };
+const visitAnimal = function (arg: animal): dogtype {
+	return {
+		name: arg.name,
+		say: () => {},
+	};
 };
 // 不兼容 类型出错
 // visitAnimal = visitDog;

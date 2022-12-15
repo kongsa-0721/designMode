@@ -10,24 +10,24 @@
  * @return {number[][]}
  */
 let subsetsWithDup = function (nums) {
-  let ret = [];
-  let set = new Set();
-  //可以先给它排序
-  nums = nums.sort((a, b) => a - b);
-  function backTrack(arr, index) {
-    // 使用set去重 set JSON.stringify
-    if (set.has(JSON.stringify(arr))) {
-      return;
-    } else {
-      set.add(JSON.stringify(arr));
-      ret.push(arr.slice());
-    }
-    for (let i = index; i < nums.length; i++) {
-      arr.push(nums[i]);
-      backTrack(arr, i + 1);
-      arr.pop();
-    }
-  }
-  backTrack([], 0);
-  return ret;
+	let ret = [];
+	let set = new Set();
+	//可以先给它排序
+	nums = nums.sort((a, b) => a - b);
+	function backTrack(arr, index) {
+		// 使用set去重 set JSON.stringify
+		if (set.has(JSON.stringify(arr))) {
+			return;
+		} else {
+			set.add(JSON.stringify(arr));
+			ret.push(arr.slice());
+		}
+		for (let i = index; i < nums.length; i++) {
+			arr.push(nums[i]);
+			backTrack(arr, i + 1);
+			arr.pop();
+		}
+	}
+	backTrack([], 0);
+	return ret;
 };

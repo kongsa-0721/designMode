@@ -6,36 +6,36 @@
  *  @return {boolean}
  */
 function isPalindromeHack(x) {
-  const str = x + "";
-  //基础款 根据长度来选择进入不同的分支
-  if (str.length % 2 === 0) {
-    //其实值需要这部分代码就可以了 i<3.5 可以取到3
-    for (let i = 0; i < str.length / 2; i++) {
-      if (str[i] !== str[str.length - i - 1]) {
-        return false;
-      }
-    }
-    return true;
-  } else {
-    for (let i = 0; i < Math.ceil(str.length / 2); i++) {
-      if (str[i] !== str[str.length - i - 1]) {
-        return false;
-      }
-    }
-    return true;
-  }
+	const str = x + "";
+	//基础款 根据长度来选择进入不同的分支
+	if (str.length % 2 === 0) {
+		//其实值需要这部分代码就可以了 i<3.5 可以取到3
+		for (let i = 0; i < str.length / 2; i++) {
+			if (str[i] !== str[str.length - i - 1]) {
+				return false;
+			}
+		}
+		return true;
+	} else {
+		for (let i = 0; i < Math.ceil(str.length / 2); i++) {
+			if (str[i] !== str[str.length - i - 1]) {
+				return false;
+			}
+		}
+		return true;
+	}
 }
 function isPalindrome(x) {
-  const str = x + "";
-  const len = str.length;
-  let slow = 0,
-    fast = len - 1;
-  while (slow < fast) {
-    if (str[slow] !== str[fast]) {
-      return false;
-    }
-    slow++;
-    fast--;
-  }
-  return true;
+	const str = x + "";
+	const len = str.length;
+	let slow = 0,
+		fast = len - 1;
+	while (slow < fast) {
+		if (str[slow] !== str[fast]) {
+			return false;
+		}
+		slow++;
+		fast--;
+	}
+	return true;
 }

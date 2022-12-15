@@ -13,20 +13,20 @@
  * @return {ListNode}
  */
 var swapPairs = function (head) {
-  //corner case 递归的出口
-  if (head === null || head.next === null) {
-    return head;
-  }
-  //创建一个新的dummy next指向第二个节点 head就是第一个节点
-  let dummy = new ListNode(0);
-  let next = head.next;
-  let pre = dummy;
-  //转换的过程  0 2 1 3
-  pre.next = next;
-  head.next = next.next;
-  next.next = head;
-  //进行递归 head的下一个节点已经指向3了 从3开始在进行递归 在corner case出去
-  head.next = swapPairs(head.next);
-  //新链表的下一个就是要返回的
-  return dummy.next;
+	//corner case 递归的出口
+	if (head === null || head.next === null) {
+		return head;
+	}
+	//创建一个新的dummy next指向第二个节点 head就是第一个节点
+	let dummy = new ListNode(0);
+	let next = head.next;
+	let pre = dummy;
+	//转换的过程  0 2 1 3
+	pre.next = next;
+	head.next = next.next;
+	next.next = head;
+	//进行递归 head的下一个节点已经指向3了 从3开始在进行递归 在corner case出去
+	head.next = swapPairs(head.next);
+	//新链表的下一个就是要返回的
+	return dummy.next;
 };

@@ -6,44 +6,44 @@ import React from "react";
 const Context1 = React.createContext({});
 
 class ContextComponent extends React.Component<any, any> {
-  state = { name: "kongsa" };
-  handleChange = () => {
-    this.setState({ name: this.state.name + "!" });
-  };
-  render() {
-    return (
-      <Context1.Provider value={{ name: this.state.name }}>
-        {this.props.children}
-        <button onClick={this.handleChange}>点击</button>
-      </Context1.Provider>
-    );
-  }
+	state = { name: "kongsa" };
+	handleChange = () => {
+		this.setState({ name: this.state.name + "!" });
+	};
+	render() {
+		return (
+			<Context1.Provider value={{ name: this.state.name }}>
+				{this.props.children}
+				<button onClick={this.handleChange}>点击</button>
+			</Context1.Provider>
+		);
+	}
 }
 
 class Item1 extends React.Component<any, any> {
-  render() {
-    return (
-      <Context1.Consumer>
-        {(value: any) => {
-          console.log(value);
-          return <>{value.name}</>;
-        }}
-      </Context1.Consumer>
-    );
-  }
+	render() {
+		return (
+			<Context1.Consumer>
+				{(value: any) => {
+					console.log(value);
+					return <>{value.name}</>;
+				}}
+			</Context1.Consumer>
+		);
+	}
 }
 
 class Item2 extends React.Component<any, any> {
-  render() {
-    return (
-      <Context1.Consumer>
-        {(value: any) => {
-          console.log(value);
-          return <>{value.name}</>;
-        }}
-      </Context1.Consumer>
-    );
-  }
+	render() {
+		return (
+			<Context1.Consumer>
+				{(value: any) => {
+					console.log(value);
+					return <>{value.name}</>;
+				}}
+			</Context1.Consumer>
+		);
+	}
 }
 
 // <ContextComponent>

@@ -4,25 +4,23 @@
  */
 
 interface Issue3 {
-  name: string;
-  age: number;
-  type: boolean;
+	name: string;
+	age: number;
+	type: boolean;
 }
 
 type p1 = Partial<Issue3>;
 
 type Par<T> = {
-  [P in keyof T]?: T[P];
+	[P in keyof T]?: T[P];
 };
 
 type p2 = Par<Issue3>;
 
 //判断两个类型是否相等
-type Equals<X, Y> = (<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y
-  ? 1
-  : 2
-  ? true
-  : false;
+type Equals<X, Y> = (<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y ? 1 : 2
+	? true
+	: false;
 type equal1<X, Y> = [X] extends [Y] ? ([Y] extends [X] ? true : false) : false;
 
 type p3 = Equals<p1, p2>;

@@ -4,7 +4,7 @@
  */
 
 function handleRequest(url: string, method: "GET" | "POST"): void {
-  return;
+	return;
 }
 
 //const req = { url: "https://example.com", method: "GET" };

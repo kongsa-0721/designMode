@@ -1,21 +1,21 @@
 {
-  "name": "code",
-  "version": "1.0.0",
-  "description": "this is a package about arithmetic and test",
-  "main": "main.js",
-  "type": "module",
-  "scripts": {
-    "test": "mocha test/common/*.test.js",
-    "leet": "mocha test/leetTest/*.test.js",
-    "all": "mocha test/**/*.test.js"
-  },
-  "keywords": [
-    "test",
-    "arithmetic"
-  ],
-  "author": "kongsa",
-  "license": "ISC",
-  "devDependencies": {
-    "mocha": "^10.0.0"
-  }
+	"name": "code",
+	"version": "1.0.0",
+	"description": "this is a package about arithmetic and test",
+	"main": "main.js",
+	"type": "module",
+	"scripts": {
+		"test": "mocha test/common/*.test.js",
+		"leet": "mocha test/leetTest/*.test.js",
+		"all": "mocha test/**/*.test.js"
+	},
+	"keywords": [
+		"test",
+		"arithmetic"
+	],
+	"author": "kongsa",
+	"license": "ISC",
+	"devDependencies": {
+		"mocha": "^10.0.0"
+	}
 }

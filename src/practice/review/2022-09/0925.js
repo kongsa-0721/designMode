@@ -4,12 +4,12 @@
  */
 
 let fnObj = {
-  a() {
-    console.log(this === global);
-  },
-  b: () => {
-    console.log(Object.keys(this) === 0);
-  },
+	a() {
+		console.log(this === global);
+	},
+	b: () => {
+		console.log(Object.keys(this) === 0);
+	},
 };
 
 let o1 = fnObj.a;
@@ -24,14 +24,14 @@ o2();
  */
 
 function myNew(fn, ...rest) {
-  let obj = Object.create(fn.prototype);
-  let res = fn.apply(obj, rest);
-  return typeof res === "object" ? res : obj;
+	let obj = Object.create(fn.prototype);
+	let res = fn.apply(obj, rest);
+	return typeof res === "object" ? res : obj;
 }
 
 var obj = {
-  name: "baidu",
-  arr: ["a", "b"],
+	name: "baidu",
+	arr: ["a", "b"],
 };
 
 var obj2 = obj;
@@ -58,17 +58,17 @@ let { a, b: y } = { a: 3, b: 4 };
 
 //模拟setInterval
 function Interval() {
-  let timer = setTimeout(function () {
-    //do something
-    console.log("do something");
-    clearTimeout(timer);
-    Interval();
-  }, 2000);
+	let timer = setTimeout(function () {
+		//do something
+		console.log("do something");
+		clearTimeout(timer);
+		Interval();
+	}, 2000);
 }
 Interval();
 
 class Person {
-  constructor() {}
+	constructor() {}
 }
 let p1 = new Person();
 console.log(typeof Person);
@@ -76,89 +76,89 @@ console.log(typeof p1);
 
 //对象数组totree
 function toTree(obj) {
-  let target = JSON.parse(JSON.stringify(obj));
-  return target.filter((item) => {
-    const child = target.filter((ch) => {
-      return ch.pid === item.id;
-    });
-    child.length && (item["children"] = child);
-    return item.pid === 0;
-  });
+	let target = JSON.parse(JSON.stringify(obj));
+	return target.filter((item) => {
+		const child = target.filter((ch) => {
+			return ch.pid === item.id;
+		});
+		child.length && (item["children"] = child);
+		return item.pid === 0;
+	});
 }
 console.log(
-  toTree([
-    { id: 1, name: "办公管理", pid: 0 },
-    { id: 2, name: "请假申请", pid: 1 },
-    { id: 3, name: "出差申请", pid: 1 },
-    { id: 4, name: "请假记录", pid: 2 },
-    { id: 5, name: "系统设置", pid: 0 },
-    { id: 6, name: "权限管理", pid: 5 },
-    { id: 7, name: "用户角色", pid: 6 },
-    { id: 8, name: "菜单设置", pid: 6 },
-  ])
+	toTree([
+		{ id: 1, name: "办公管理", pid: 0 },
+		{ id: 2, name: "请假申请", pid: 1 },
+		{ id: 3, name: "出差申请", pid: 1 },
+		{ id: 4, name: "请假记录", pid: 2 },
+		{ id: 5, name: "系统设置", pid: 0 },
+		{ id: 6, name: "权限管理", pid: 5 },
+		{ id: 7, name: "用户角色", pid: 6 },
+		{ id: 8, name: "菜单设置", pid: 6 },
+	]),
 );
 
 //多叉树的遍历
 let root = {
-  name: "A",
-  children: [
-    {
-      name: "B1",
-      children: [
-        {
-          name: "C1",
-          children: [
-            {
-              name: "D",
-              children: [
-                {
-                  name: "D1",
-                  children: [{ name: "F1 " }, { name: "F2" }],
-                },
-                { name: "D2" },
-              ],
-            },
-          ],
-        },
-      ],
-    },
-    {
-      name: "B2",
-      children: [{ name: "C2" }, { name: "A" }],
-    },
-  ],
+	name: "A",
+	children: [
+		{
+			name: "B1",
+			children: [
+				{
+					name: "C1",
+					children: [
+						{
+							name: "D",
+							children: [
+								{
+									name: "D1",
+									children: [{ name: "F1 " }, { name: "F2" }],
+								},
+								{ name: "D2" },
+							],
+						},
+					],
+				},
+			],
+		},
+		{
+			name: "B2",
+			children: [{ name: "C2" }, { name: "A" }],
+		},
+	],
 };
 
 function dfsTree(arg, flag) {
-  let res = [];
-  let stack = [arg];
-  while (stack.length) {
-    const item = stack.pop();
-    if (item["name"] === flag) {
-      res.push(item["name"]);
-    }
-    if (item["children"]) {
-      item["children"].map((e) => {
-        stack.push(e);
-      });
-    }
-  }
-  return res;
+	let res = [];
+	let stack = [arg];
+	while (stack.length) {
+		const item = stack.pop();
+		if (item["name"] === flag) {
+			res.push(item["name"]);
+		}
+		if (item["children"]) {
+			item["children"].map((e) => {
+				stack.push(e);
+			});
+		}
+	}
+	return res;
 }
 let dfsRes = [];
 function dfsTree1(arg, flag) {
-  if (!arg) {
-    return;
-  }
-  if (arg["name"] === flag) {
-    dfsRes.push(arg["name"]);
-  }
-  if (arg["children"] && arg["children"].length > 0) {
-    arg["children"].map((e) => {
-      return dfsTree1(e, flag);
-    });
-  }
-  return dfsRes;
+	if (!arg) {
+		return;
+	}
+	if (arg["name"] === flag) {
+		dfsRes.push(arg["name"]);
+	}
+	if (arg["children"] && arg["children"].length > 0) {
+		arg["children"].map((e) => {
+			return dfsTree1(e, flag);
+		});
+	}
+	return dfsRes;
 }
 
 console.log(dfsTree1(root, "A"));
@@ -166,34 +166,34 @@ console.log(dfsTree1(root, "A"));
 let arr1 = [1, 2, 3, 4, [5, 6, 7, [8, 9]]];
 //数组扁平化
 function flatArr(arr, depth) {
-  return arr.reduce((total, cur) => {
-    return Array.isArray(cur) && depth
-      ? [...total, ...flatArr(cur, depth - 1)]
-      : [...total, ...[cur]];
-  }, []);
+	return arr.reduce((total, cur) => {
+		return Array.isArray(cur) && depth
+			? [...total, ...flatArr(cur, depth - 1)]
+			: [...total, ...[cur]];
+	}, []);
 }
 function flatArr1(arr) {
-  let res = [];
-  for (let i = 0; i < arr.length; i++) {
-    if (Array.isArray(arr[i])) {
-      //核心的逻辑就一句话
-      res = res.concat(flatArr1(arr[i]));
-    } else {
-      res.push(arr[i]);
-    }
-  }
-  return res;
+	let res = [];
+	for (let i = 0; i < arr.length; i++) {
+		if (Array.isArray(arr[i])) {
+			//核心的逻辑就一句话
+			res = res.concat(flatArr1(arr[i]));
+		} else {
+			res.push(arr[i]);
+		}
+	}
+	return res;
 }
 function flatArr2(arr) {
-  let res = [];
-  while (arr.length) {
-    const item = arr.pop();
-    if (Array.isArray(item)) {
-      res = res.concat(flatArr2(item));
-    } else {
-      res.push(item);
-    }
-  }
-  return res;
+	let res = [];
+	while (arr.length) {
+		const item = arr.pop();
+		if (Array.isArray(item)) {
+			res = res.concat(flatArr2(item));
+		} else {
+			res.push(item);
+		}
+	}
+	return res;
 }
 console.log(flatArr2(arr1));

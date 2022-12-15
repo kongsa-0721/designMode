@@ -3,12 +3,12 @@
  */
 let defaultVal = 0;
 Object.defineProperty(window, "a", {
-  get() {
-    return ++defaultVal;
-  },
+	get() {
+		return ++defaultVal;
+	},
 });
 if (a == 1 && a == 2 && a == 3) {
-  console.log('you"re win');
+	console.log('you"re win');
 }
 
 const len1 = ({} + {}).length; //30

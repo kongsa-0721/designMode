@@ -3,6 +3,6 @@
  */
 import { JSONValue } from "./type";
 function changeValueAction(value: JSONValue) {
-  return value;
+	return value;
 }
 export { changeValueAction };
