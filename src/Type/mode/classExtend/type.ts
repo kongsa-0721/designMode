@@ -7,4 +7,4 @@ export interface JSONObject {
 	[x: string]: JSONValue | undefined;
 }
 
-export type JSONArray = Array<JSONValue>
+export type JSONArray = Array<JSONValue>;

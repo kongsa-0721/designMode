@@ -5,7 +5,7 @@ type JSONValue = number | string | boolean | JSONObject | JSONArray;
 interface JSONObject {
 	[x: string]: JSONValue | undefined;
 }
-type JSONArray = Array<JSONValue>
+type JSONArray = Array<JSONValue>;
 
 enum actionTypes {
 	CHANGE_VALUE = "CHANGE_VALUE",
