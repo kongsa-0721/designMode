@@ -7,17 +7,17 @@ import Combine from "./redux/combine";
 import { Protal } from "./basic/protal";
 import { Provider } from "react-redux";
 import { store } from "./redux/store/store";
-import { Mom } from "./test";
+import { BasicAhooks } from "./ahooks/basic";
 
 function App() {
-  return (
-    <Provider store={store}>
-      this is app component
-      <Combine />
-      <Mom />
-      <Protal />
-    </Provider>
-  );
+	return (
+		<Provider store={store}>
+			this is app component
+			<Combine />
+			<Protal />
+			<BasicAhooks />
+		</Provider>
+	);
 }
 
 export default App;
