@@ -3,12 +3,12 @@
  * 请你在该数组中找出 和为目标值 target的那 两个 整数，并返回它们的数组下标。
  */
 function twoSum(nums, target) {
-	const mymap = new Map();
+	const myMap = new Map();
 	for (let i = 0; i < nums.length; i++) {
-		if (mymap.has(target - nums[i])) {
-			return [mymap.get(target - nums[i]), i];
+		if (myMap.has(target - nums[i])) {
+			return [myMap.get(target - nums[i]), i];
 		}
-		mymap.set(nums[i], i);
+		myMap.set(nums[i], i);
 	}
 	return [];
 }
@@ -19,7 +19,7 @@ let twoSumHack = function (nums, target) {
 	for (let item of nums) {
 		const flag = target - item;
 		if (map.has(flag)) {
-			//改成lastIndexof 返回最后一个数的下标 就可以了 因为之前的数可能已经被set进去了 返回最后一个就不会冲突
+			//改成lastIndexOf 返回最后一个数的下标 就可以了 因为之前的数可能已经被set进去了 返回最后一个就不会冲突
 			return [nums.indexOf(item), map.get(flag)];
 		}
 		map.set(item, nums.indexOf(item));
