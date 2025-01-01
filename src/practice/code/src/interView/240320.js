@@ -17,5 +17,5 @@ function price(nums) {
 		ans = Math.max(preBest, nums[i] - i + preBest);
 		preBest = Math.max(preBest, nums[i] + i);
 	}
-	return ans
+	return ans;
 }
